@@ -31,44 +31,117 @@ export default function Home() {
   const featured = getFeaturedProjects().slice(0, 3);
 
   return (
-    <main>
+    <main className="home-page">
       <section className="hero">
-        <SiteHeader />
-        <div className="hero-media" aria-hidden="true">
-          <Image
-            src="/images/projects/cdam-ai-cover.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="hero-image"
-          />
-          <div className="hero-shade" />
-          <div className="hero-orbit hero-orbit-a" />
-          <div className="hero-orbit hero-orbit-b" />
-        </div>
-
-        <div className="hero-copy page-shell">
-          <p className="eyebrow light">AI · FILM · VISUAL STORYTELLING</p>
-          <div className="hero-title-wrap">
-            <h1>WILLIAM</h1>
-            <p className="hero-role">AI Creative Technologist</p>
-          </div>
-          <div className="hero-bottom">
-            <p className="hero-subtitle">
-              Exploring the intersection of
+        <SiteHeader dark={false} />
+        <div className="hero-editorial page-shell">
+          <div className="hero-copy">
+            <p className="hero-kicker">AI · FILM · VISUAL STORYTELLING</p>
+            <h1>
+              在真实影像与生成技术之间，
               <br />
-              AI, Film and Visual Storytelling.
+              寻找新的叙事方式。
+            </h1>
+            <div className="hero-identity">
+              <p>William</p>
+              <p>AI Creative Technologist</p>
+            </div>
+            <p className="hero-description">
+              从真实拍摄现场出发，在生成式影像中延伸电影语言。
             </p>
-            <Link className="circle-link" href="/works" aria-label="View selected works">
-              <span>VIEW</span>
-              <span>WORKS ↗</span>
+            <Link className="hero-link" href="/works">
+              <span>查看作品</span>
+              <span aria-hidden="true">↗</span>
             </Link>
+          </div>
+
+          <div className="hero-collage" aria-label="William 的代表影像">
+            <Link
+              className="hero-card hero-card-ai"
+              href="/works/cdam-ai-promo"
+              aria-label="查看成都美术学院数字媒体艺术系 AI 宣传片"
+            >
+              <figure>
+                <div className="hero-card-image">
+                  <Image
+                    src="/images/projects/cdam-ai-cover.jpg"
+                    alt="成都美术学院数字媒体艺术系 AI 宣传片的生成式影像画面"
+                    fill
+                    priority
+                    sizes="(max-width: 760px) 86vw, (max-width: 1100px) 34vw, 38vw"
+                    className="hero-card-media hero-card-media-ai"
+                  />
+                </div>
+                <figcaption>
+                  <span>30｜成都美术学院数字媒体艺术系 AI 宣传片</span>
+                  <span>AI Moving Image</span>
+                </figcaption>
+              </figure>
+            </Link>
+
+            <Link
+              className="hero-card hero-card-spring"
+              href="/works/daochunhan"
+              aria-label="查看倒春寒"
+            >
+              <figure>
+                <div className="hero-card-image">
+                  <Image
+                    src="/images/projects/daochunhan-cover.jpg"
+                    alt="《倒春寒》电影静帧，人物站在树木构成的拱形结构下"
+                    fill
+                    sizes="(max-width: 760px) 44vw, (max-width: 1100px) 24vw, 27vw"
+                    className="hero-card-media hero-card-media-spring"
+                  />
+                </div>
+                <figcaption>
+                  <span>26｜倒春寒</span>
+                  <span>Film / Direction / Cinematography</span>
+                </figcaption>
+              </figure>
+            </Link>
+
+            <Link
+              className="hero-card hero-card-yuhua"
+              href="/works/yuhua"
+              aria-label="查看羽化"
+            >
+              <figure>
+                <div className="hero-card-image">
+                  <Image
+                    src="/images/projects/yuhua-cover.jpg"
+                    alt="《羽化》电影静帧，冷色灯光下人物靠近电视"
+                    fill
+                    sizes="(max-width: 760px) 38vw, (max-width: 1100px) 18vw, 19vw"
+                    className="hero-card-media hero-card-media-yuhua"
+                  />
+                </div>
+                <figcaption>
+                  <span>15｜羽化</span>
+                  <span>Cinematography</span>
+                </figcaption>
+              </figure>
+            </Link>
+
+            <figure className="hero-card hero-card-onsite">
+              <div className="hero-card-image">
+                <Image
+                  src="/images/about/william-on-set.jpg"
+                  alt="William 在摄影现场操作电影摄影机"
+                  fill
+                  sizes="(max-width: 1100px) 13vw, 15vw"
+                  className="hero-card-media hero-card-media-onsite"
+                />
+              </div>
+              <figcaption>
+                <span>William / On Set</span>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
 
-      <section className="section page-shell" id="works">
+      <section className="section page-shell home-selected" id="works">
         <div className="section-heading">
           <div>
             <p className="eyebrow">SELECTED WORKS</p>

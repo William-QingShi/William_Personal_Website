@@ -5,7 +5,7 @@ export function SiteHeader({ dark = true }: { dark?: boolean }) {
     <header className={`site-header ${dark ? "site-header-dark" : ""}`}>
       <div className="site-header-inner page-shell">
         <Link className="wordmark" href="/" aria-label="William home">
-          W<span>•</span>
+          W.
         </Link>
         <nav aria-label="Primary navigation">
           <Link href="/works">Works</Link>
