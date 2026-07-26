@@ -8,6 +8,7 @@ export function SiteHeader({ dark = true }: { dark?: boolean }) {
           W.
         </Link>
         <nav aria-label="Primary navigation">
+          <Link href="/">Home</Link>
           <Link href="/works">Works</Link>
           <Link href="/#what-i-do">What I Do</Link>
           <Link href="/#about">About</Link>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { HomeHero } from "@/components/home-hero";
 import { ProjectCard } from "@/components/project-card";
 import { SiteHeader } from "@/components/site-header";
 import { getFeaturedProjects } from "@/lib/projects";
@@ -7,21 +8,25 @@ import { getFeaturedProjects } from "@/lib/projects";
 const capabilities = [
   {
     number: "01",
+    archive: "AI FILM",
     title: "AI 影像与生成工作流",
     description: "从概念、Prompt 与资产规划，到图像生成、视频生成、剪辑、声音和包装。",
   },
   {
     number: "02",
+    archive: "CINEMATOGRAPHY",
     title: "视觉叙事与摄影设计",
     description: "把叙事目标转化为镜头、画幅、摄影、灯光与现场视觉系统。",
   },
   {
     number: "03",
+    archive: "VISUAL STORYTELLING",
     title: "纪录片与人物内容",
     description: "在真实环境中观察人物，并以克制的机位、灯光和现场判断建立影像。",
   },
   {
     number: "04",
+    archive: "FILM PRODUCTION",
     title: "前期策划与项目执行",
     description: "将需求和脚本转化为方案、分镜、器材与拍摄计划，并连接制作和交付。",
   },
@@ -32,114 +37,8 @@ export default function Home() {
 
   return (
     <main className="home-page">
-      <section className="hero">
-        <SiteHeader dark={false} />
-        <div className="hero-editorial page-shell">
-          <div className="hero-copy">
-            <p className="hero-kicker">AI · FILM · VISUAL STORYTELLING</p>
-            <h1>
-              在真实影像与生成技术之间，
-              <br />
-              寻找新的叙事方式。
-            </h1>
-            <div className="hero-identity">
-              <p>William</p>
-              <p>AI Creative Technologist</p>
-            </div>
-            <p className="hero-description">
-              从真实拍摄现场出发，在生成式影像中延伸电影语言。
-            </p>
-            <Link className="hero-link" href="/works">
-              <span>查看作品</span>
-              <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
-
-          <div className="hero-collage" aria-label="William 的代表影像">
-            <Link
-              className="hero-card hero-card-ai"
-              href="/works/cdam-ai-promo"
-              aria-label="查看成都美术学院数字媒体艺术系 AI 宣传片"
-            >
-              <figure>
-                <div className="hero-card-image">
-                  <Image
-                    src="/images/projects/cdam-ai-cover.jpg"
-                    alt="成都美术学院数字媒体艺术系 AI 宣传片的生成式影像画面"
-                    fill
-                    priority
-                    sizes="(max-width: 760px) 86vw, (max-width: 1100px) 34vw, 38vw"
-                    className="hero-card-media hero-card-media-ai"
-                  />
-                </div>
-                <figcaption>
-                  <span>30｜成都美术学院数字媒体艺术系 AI 宣传片</span>
-                  <span>AI Moving Image</span>
-                </figcaption>
-              </figure>
-            </Link>
-
-            <Link
-              className="hero-card hero-card-spring"
-              href="/works/daochunhan"
-              aria-label="查看倒春寒"
-            >
-              <figure>
-                <div className="hero-card-image">
-                  <Image
-                    src="/images/projects/daochunhan-cover.jpg"
-                    alt="《倒春寒》电影静帧，人物站在树木构成的拱形结构下"
-                    fill
-                    sizes="(max-width: 760px) 44vw, (max-width: 1100px) 24vw, 27vw"
-                    className="hero-card-media hero-card-media-spring"
-                  />
-                </div>
-                <figcaption>
-                  <span>26｜倒春寒</span>
-                  <span>Film / Direction / Cinematography</span>
-                </figcaption>
-              </figure>
-            </Link>
-
-            <Link
-              className="hero-card hero-card-yuhua"
-              href="/works/yuhua"
-              aria-label="查看羽化"
-            >
-              <figure>
-                <div className="hero-card-image">
-                  <Image
-                    src="/images/projects/yuhua-cover.jpg"
-                    alt="《羽化》电影静帧，冷色灯光下人物靠近电视"
-                    fill
-                    sizes="(max-width: 760px) 38vw, (max-width: 1100px) 18vw, 19vw"
-                    className="hero-card-media hero-card-media-yuhua"
-                  />
-                </div>
-                <figcaption>
-                  <span>15｜羽化</span>
-                  <span>Cinematography</span>
-                </figcaption>
-              </figure>
-            </Link>
-
-            <figure className="hero-card hero-card-onsite">
-              <div className="hero-card-image">
-                <Image
-                  src="/images/about/william-on-set.jpg"
-                  alt="William 在摄影现场操作电影摄影机"
-                  fill
-                  sizes="(max-width: 1100px) 13vw, 15vw"
-                  className="hero-card-media hero-card-media-onsite"
-                />
-              </div>
-              <figcaption>
-                <span>William / On Set</span>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
+      <SiteHeader />
+      <HomeHero />
 
       <section className="section page-shell home-selected" id="works">
         <div className="section-heading">
@@ -168,12 +67,31 @@ export default function Home() {
               技术不是画面的目的。它是一套让叙事、情绪与真实制作彼此衔接的方法。
             </p>
           </div>
-          <div className="capability-list">
-            {capabilities.map((item) => (
-              <article className="capability-row" key={item.number}>
-                <span className="capability-number">{item.number}</span>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
+          <div className="capability-archive">
+            {capabilities.map((item, index) => (
+              <article
+                className={`archive-folder archive-folder-${index + 1}`}
+                key={item.number}
+              >
+                <div className="folder-paper" aria-hidden="true">
+                  <span>WILLIAM / CREATIVE ARCHIVE</span>
+                </div>
+                <div className="folder-tab">
+                  <span>{item.number}</span>
+                  <span>FIELD</span>
+                </div>
+                <div className="folder-face">
+                  <div className="folder-meta">
+                    <span>{item.archive}</span>
+                    <span>ARCHIVE / {item.number}</span>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <div className="folder-footer" aria-hidden="true">
+                    <span>CREATIVE PRACTICE</span>
+                    <span>W/L</span>
+                  </div>
+                </div>
               </article>
             ))}
           </div>
