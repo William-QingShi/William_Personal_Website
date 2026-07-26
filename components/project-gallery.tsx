@@ -1,0 +1,153 @@
+"use client";
+
+import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
+
+type ProjectGalleryProps = {
+  projectTitle: string;
+  stills: string[];
+  aspectRatio: string;
+  sectionNumber: string;
+};
+
+export function ProjectGallery({
+  projectTitle,
+  stills,
+  aspectRatio,
+  sectionNumber,
+}: ProjectGalleryProps) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const close = useCallback(() => setActiveIndex(null), []);
+  const showPrevious = useCallback(() => {
+    setActiveIndex((current) =>
+      current === null ? null : (current - 1 + stills.length) % stills.length,
+    );
+  }, [stills.length]);
+  const showNext = useCallback(() => {
+    setActiveIndex((current) =>
+      current === null ? null : (current + 1) % stills.length,
+    );
+  }, [stills.length]);
+
+  useEffect(() => {
+    if (activeIndex === null) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") close();
+      if (event.key === "ArrowLeft") showPrevious();
+      if (event.key === "ArrowRight") showNext();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [activeIndex, close, showNext, showPrevious]);
+
+  if (stills.length === 0) return null;
+
+  return (
+    <article className="project-module project-stills">
+      <div className="page-shell module-heading">
+        <span>{sectionNumber}</span>
+        <div>
+          <p>Image Gallery / Stills</p>
+          <h2>影像静帧</h2>
+        </div>
+        <p className="module-note">
+          {projectTitle} · {stills.length} frames
+        </p>
+      </div>
+
+      <div className="page-shell stills-grid">
+        {stills.map((still, index) => (
+          <button
+            type="button"
+            className="still-card"
+            style={{ aspectRatio }}
+            onClick={() => setActiveIndex(index)}
+            aria-label={`查看 ${projectTitle} 第 ${index + 1} 张静帧大图`}
+            key={still}
+          >
+            <Image
+              src={still}
+              alt={`${projectTitle} 静帧 ${index + 1}`}
+              fill
+              sizes="(max-width: 760px) 100vw, 50vw"
+              className="still-image"
+            />
+            <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+          </button>
+        ))}
+      </div>
+
+      {activeIndex !== null && (
+        <div
+          className="stills-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${projectTitle} 静帧大图`}
+          onClick={close}
+        >
+          <button
+            type="button"
+            className="lightbox-close"
+            onClick={close}
+            aria-label="关闭大图"
+            autoFocus
+          >
+            CLOSE ×
+          </button>
+
+          {stills.length > 1 && (
+            <button
+              type="button"
+              className="lightbox-arrow lightbox-previous"
+              onClick={(event) => {
+                event.stopPropagation();
+                showPrevious();
+              }}
+              aria-label="查看上一张静帧"
+            >
+              ←
+            </button>
+          )}
+
+          <div className="lightbox-image-wrap" onClick={(event) => event.stopPropagation()}>
+            <Image
+              src={stills[activeIndex]}
+              alt={`${projectTitle} 静帧 ${activeIndex + 1} 大图`}
+              fill
+              sizes="100vw"
+              className="lightbox-image"
+              priority
+            />
+          </div>
+
+          {stills.length > 1 && (
+            <button
+              type="button"
+              className="lightbox-arrow lightbox-next"
+              onClick={(event) => {
+                event.stopPropagation();
+                showNext();
+              }}
+              aria-label="查看下一张静帧"
+            >
+              →
+            </button>
+          )}
+
+          <p className="lightbox-count" aria-live="polite">
+            {String(activeIndex + 1).padStart(2, "0")} / {String(stills.length).padStart(2, "0")}
+          </p>
+        </div>
+      )}
+    </article>
+  );
+}

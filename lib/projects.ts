@@ -21,6 +21,8 @@ export type Project = {
   displayLevel: string;
   cover: string;
   frames: string[];
+  stills: string[];
+  galleryAspect: string;
   kind: ProjectKind;
   featured: boolean;
   externalFilm?: string;
@@ -36,6 +38,13 @@ const sourceProjects = [
   { id: "31", raw: hbnRaw },
 ];
 
+function gallery(slug: string, count: number) {
+  return Array.from(
+    { length: count },
+    (_, index) => `/images/projects/stills/${slug}-${String(index + 1).padStart(2, "0")}.jpg`,
+  );
+}
+
 const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "overview" | "role" | "capabilities" | "position" | "displayLevel">> = {
   "30": {
     id: "30",
@@ -46,6 +55,8 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/cdam-ai-process-1.jpg",
       "/images/projects/cdam-ai-process-2.jpg",
     ],
+    stills: gallery("cdam-ai-promo", 4),
+    galleryAspect: "16 / 9",
     kind: "ai",
     featured: true,
   },
@@ -58,6 +69,8 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/daochunhan-frame-2.jpg",
       "/images/projects/daochunhan-frame-3.jpg",
     ],
+    stills: gallery("daochunhan", 8),
+    galleryAspect: "16 / 9",
     kind: "cinematography",
     featured: true,
   },
@@ -70,6 +83,8 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/yuhua-frame-2.jpg",
       "/images/projects/yuhua-frame-3.jpg",
     ],
+    stills: gallery("yuhua", 9),
+    galleryAspect: "16 / 9",
     kind: "cinematography",
     featured: true,
   },
@@ -81,6 +96,8 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/factory-frame-1.jpg",
       "/images/projects/factory-frame-2.jpg",
     ],
+    stills: gallery("vanishing-factory", 3),
+    galleryAspect: "4 / 3",
     kind: "documentary",
     featured: false,
     externalFilm: "https://www.bilibili.com/video/BV1bh81e5EnH",
@@ -93,6 +110,8 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/tides-frame-1.jpg",
       "/images/projects/tides-frame-2.jpg",
     ],
+    stills: gallery("between-tides", 10),
+    galleryAspect: "16 / 9",
     kind: "documentary",
     featured: false,
   },
@@ -104,6 +123,8 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/form-frame-1.jpg",
       "/images/projects/form-frame-2.jpg",
     ],
+    stills: gallery("the-form-i-see", 8),
+    galleryAspect: "16 / 9",
     kind: "cinematography",
     featured: false,
   },
@@ -115,6 +136,8 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/hbn-frame-1.jpg",
       "/images/projects/hbn-frame-2.jpg",
     ],
+    stills: gallery("hbn-aigc-concept", 7),
+    galleryAspect: "16 / 9",
     kind: "ai",
     featured: false,
   },

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Fragment } from "react";
+import { ProjectGallery } from "@/components/project-gallery";
 import { SiteHeader } from "@/components/site-header";
 import { getProject, projects, type ProjectKind } from "@/lib/projects";
 
@@ -101,47 +103,59 @@ export default async function ProjectPage({
         {modules.map((module, index) => {
           const image = project.frames[index % project.frames.length];
           const isFilm = module.title === "Final Film";
+          const moduleNumber = index + 1 + (isFilm ? 1 : 0);
 
           return (
-            <article className={`project-module ${isFilm ? "project-module-film" : ""}`} key={module.title}>
-              <div className="page-shell module-heading">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <p>{module.title}</p>
-                  <h2>{module.cn}</h2>
-                </div>
-                <p className="module-note">
-                  {isFilm
-                    ? "完整成片模块已预留；待确认公开权限与最终发布版本后接入。"
-                    : project.capabilities.slice(index, index + 3).join(" · ") || project.position}
-                </p>
-              </div>
-
-              {!isFilm && (
-                <div className="module-image-wrap">
-                  <Image
-                    src={image}
-                    alt={`${project.title} — ${module.cn}`}
-                    fill
-                    sizes="100vw"
-                    className="module-image"
-                  />
-                </div>
-              )}
-
+            <Fragment key={module.title}>
               {isFilm && (
-                <div className="page-shell film-placeholder">
-                  <span>FINAL FILM</span>
-                  {project.externalFilm ? (
-                    <a href={project.externalFilm} target="_blank" rel="noreferrer">
-                      Watch the public film ↗
-                    </a>
-                  ) : (
-                    <p>Film available · Publishing permission to be confirmed</p>
-                  )}
-                </div>
+                <ProjectGallery
+                  projectTitle={project.title}
+                  stills={project.stills}
+                  aspectRatio={project.galleryAspect}
+                  sectionNumber={String(index + 1).padStart(2, "0")}
+                />
               )}
-            </article>
+
+              <article className={`project-module ${isFilm ? "project-module-film" : ""}`}>
+                <div className="page-shell module-heading">
+                  <span>{String(moduleNumber).padStart(2, "0")}</span>
+                  <div>
+                    <p>{module.title}</p>
+                    <h2>{module.cn}</h2>
+                  </div>
+                  <p className="module-note">
+                    {isFilm
+                      ? "完整成片模块已预留；待确认公开权限与最终发布版本后接入。"
+                      : project.capabilities.slice(index, index + 3).join(" · ") || project.position}
+                  </p>
+                </div>
+
+                {!isFilm && (
+                  <div className="module-image-wrap">
+                    <Image
+                      src={image}
+                      alt={`${project.title} — ${module.cn}`}
+                      fill
+                      sizes="100vw"
+                      className="module-image"
+                    />
+                  </div>
+                )}
+
+                {isFilm && (
+                  <div className="page-shell film-placeholder">
+                    <span>FINAL FILM</span>
+                    {project.externalFilm ? (
+                      <a href={project.externalFilm} target="_blank" rel="noreferrer">
+                        Watch the public film ↗
+                      </a>
+                    ) : (
+                      <p>Film available · Publishing permission to be confirmed</p>
+                    )}
+                  </div>
+                )}
+              </article>
+            </Fragment>
           );
         })}
       </section>

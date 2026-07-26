@@ -902,6 +902,123 @@ img {
   object-fit: cover;
 }
 
+.project-stills {
+  padding-bottom: 110px;
+}
+
+.stills-grid {
+  columns: 2;
+  column-gap: clamp(16px, 2vw, 30px);
+}
+
+.still-card {
+  position: relative;
+  width: 100%;
+  margin: 0 0 clamp(16px, 2vw, 30px);
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  break-inside: avoid;
+  border: 0;
+  background: #161614;
+  color: white;
+  cursor: zoom-in;
+}
+
+.still-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  pointer-events: none;
+}
+
+.still-image {
+  object-fit: cover;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.still-card:hover .still-image,
+.still-card:focus-visible .still-image {
+  transform: scale(1.025);
+}
+
+.still-card > span {
+  position: absolute;
+  z-index: 1;
+  right: 14px;
+  bottom: 12px;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.68);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.stills-lightbox {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(8, 8, 7, 0.96);
+  color: white;
+}
+
+.lightbox-image-wrap {
+  position: absolute;
+  inset: 70px 90px 66px;
+}
+
+.lightbox-image {
+  object-fit: contain;
+}
+
+.lightbox-close,
+.lightbox-arrow {
+  position: absolute;
+  z-index: 2;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.lightbox-close {
+  top: 28px;
+  right: 32px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+}
+
+.lightbox-arrow {
+  top: 50%;
+  width: 46px;
+  height: 46px;
+  font-size: 26px;
+  transform: translateY(-50%);
+}
+
+.lightbox-previous {
+  left: 22px;
+}
+
+.lightbox-next {
+  right: 22px;
+}
+
+.lightbox-count {
+  position: absolute;
+  z-index: 2;
+  bottom: 25px;
+  left: 50%;
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.62);
+  transform: translateX(-50%);
+}
+
 .project-module-film {
   padding-bottom: 100px;
 }
@@ -980,7 +1097,8 @@ img {
   .hero-card,
   .hero-link span:last-child,
   .project-image,
-  .project-hover {
+  .project-hover,
+  .still-image {
     transition: none;
   }
 }
@@ -1326,6 +1444,41 @@ img {
 
   .module-image-wrap {
     aspect-ratio: 4 / 3;
+  }
+
+  .project-stills {
+    padding-bottom: 72px;
+  }
+
+  .stills-grid {
+    columns: 1;
+  }
+
+  .lightbox-image-wrap {
+    inset: 68px 14px 92px;
+  }
+
+  .lightbox-close {
+    top: 25px;
+    right: 18px;
+  }
+
+  .lightbox-arrow {
+    top: auto;
+    bottom: 20px;
+    transform: none;
+  }
+
+  .lightbox-previous {
+    left: 16px;
+  }
+
+  .lightbox-next {
+    right: 16px;
+  }
+
+  .lightbox-count {
+    bottom: 35px;
   }
 
   .film-placeholder {
