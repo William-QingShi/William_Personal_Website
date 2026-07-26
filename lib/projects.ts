@@ -22,7 +22,11 @@ export type Project = {
   cover: string;
   frames: string[];
   stills: string[];
+  bts: string[];
+  process: string[];
   galleryAspect: string;
+  btsAspect: string;
+  processAspect: string;
   kind: ProjectKind;
   featured: boolean;
   externalFilm?: string;
@@ -38,10 +42,10 @@ const sourceProjects = [
   { id: "31", raw: hbnRaw },
 ];
 
-function gallery(slug: string, count: number) {
+function mediaSet(folder: "stills" | "bts" | "process", slug: string, count: number) {
   return Array.from(
     { length: count },
-    (_, index) => `/images/projects/stills/${slug}-${String(index + 1).padStart(2, "0")}.jpg`,
+    (_, index) => `/images/projects/${folder}/${slug}-${String(index + 1).padStart(2, "0")}.jpg`,
   );
 }
 
@@ -55,8 +59,12 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/cdam-ai-process-1.jpg",
       "/images/projects/cdam-ai-process-2.jpg",
     ],
-    stills: gallery("cdam-ai-promo", 4),
+    stills: mediaSet("stills", "cdam-ai-promo", 4),
+    bts: [],
+    process: mediaSet("process", "cdam-ai-promo", 5),
     galleryAspect: "16 / 9",
+    btsAspect: "3 / 2",
+    processAspect: "16 / 10",
     kind: "ai",
     featured: true,
   },
@@ -69,8 +77,12 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/daochunhan-frame-2.jpg",
       "/images/projects/daochunhan-frame-3.jpg",
     ],
-    stills: gallery("daochunhan", 8),
+    stills: mediaSet("stills", "daochunhan", 8),
+    bts: [],
+    process: [],
     galleryAspect: "16 / 9",
+    btsAspect: "3 / 2",
+    processAspect: "16 / 10",
     kind: "cinematography",
     featured: true,
   },
@@ -83,8 +95,12 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/yuhua-frame-2.jpg",
       "/images/projects/yuhua-frame-3.jpg",
     ],
-    stills: gallery("yuhua", 9),
+    stills: mediaSet("stills", "yuhua", 9),
+    bts: mediaSet("bts", "yuhua", 8),
+    process: mediaSet("process", "yuhua", 6),
     galleryAspect: "16 / 9",
+    btsAspect: "3 / 2",
+    processAspect: "16 / 10",
     kind: "cinematography",
     featured: true,
   },
@@ -96,8 +112,12 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/factory-frame-1.jpg",
       "/images/projects/factory-frame-2.jpg",
     ],
-    stills: gallery("vanishing-factory", 3),
+    stills: mediaSet("stills", "vanishing-factory", 3),
+    bts: [],
+    process: [],
     galleryAspect: "4 / 3",
+    btsAspect: "4 / 3",
+    processAspect: "16 / 10",
     kind: "documentary",
     featured: false,
     externalFilm: "https://www.bilibili.com/video/BV1bh81e5EnH",
@@ -110,8 +130,12 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/tides-frame-1.jpg",
       "/images/projects/tides-frame-2.jpg",
     ],
-    stills: gallery("between-tides", 10),
+    stills: mediaSet("stills", "between-tides", 10),
+    bts: mediaSet("bts", "between-tides", 7),
+    process: [],
     galleryAspect: "16 / 9",
+    btsAspect: "4 / 3",
+    processAspect: "16 / 10",
     kind: "documentary",
     featured: false,
   },
@@ -123,8 +147,12 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/form-frame-1.jpg",
       "/images/projects/form-frame-2.jpg",
     ],
-    stills: gallery("the-form-i-see", 8),
+    stills: mediaSet("stills", "the-form-i-see", 8),
+    bts: mediaSet("bts", "the-form-i-see", 4),
+    process: [],
     galleryAspect: "16 / 9",
+    btsAspect: "16 / 9",
+    processAspect: "16 / 10",
     kind: "cinematography",
     featured: false,
   },
@@ -136,8 +164,12 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/hbn-frame-1.jpg",
       "/images/projects/hbn-frame-2.jpg",
     ],
-    stills: gallery("hbn-aigc-concept", 7),
+    stills: mediaSet("stills", "hbn-aigc-concept", 7),
+    bts: [],
+    process: mediaSet("process", "hbn-aigc-concept", 10),
     galleryAspect: "16 / 9",
+    btsAspect: "3 / 2",
+    processAspect: "16 / 10",
     kind: "ai",
     featured: false,
   },
@@ -156,7 +188,7 @@ function field(raw: string, label: string) {
 function parseProject(id: string, raw: string): Project {
   const config = projectConfig[id];
   const sourceTitle = raw.match(/^# (.+)$/m)?.[1]?.trim() ?? "";
-  const title = id === "26" ? "倒春寒" : sourceTitle;
+  const title = sourceTitle;
   const type = field(section(raw, "Basic Information"), "项目类型");
   const year = field(section(raw, "Basic Information"), "完成时间")
     .replace(/年/g, ".")

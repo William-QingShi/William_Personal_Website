@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { HomeHero } from "@/components/home-hero";
+import { HomeMotion } from "@/components/home-motion";
 import { ProjectCard } from "@/components/project-card";
 import { SiteHeader } from "@/components/site-header";
 import { getFeaturedProjects } from "@/lib/projects";
@@ -37,10 +38,11 @@ export default function Home() {
 
   return (
     <main className="home-page">
+      <HomeMotion />
       <SiteHeader />
       <HomeHero />
 
-      <section className="section page-shell home-selected" id="works">
+      <section className="section page-shell home-selected" id="works" data-home-reveal>
         <div className="section-heading">
           <div>
             <p className="eyebrow">SELECTED WORKS</p>
@@ -56,7 +58,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="capabilities section" id="what-i-do">
+      <section className="capabilities section" id="what-i-do" data-home-reveal>
         <div className="page-shell">
           <div className="section-heading capability-heading">
             <div>
@@ -98,7 +100,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="about section page-shell" id="about">
+      <section className="about section page-shell" id="about" data-home-reveal>
         <div className="about-image-wrap">
           <Image
             src="/images/about/william-on-set.jpg"

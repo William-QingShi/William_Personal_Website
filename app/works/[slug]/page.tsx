@@ -58,11 +58,17 @@ export default async function ProjectPage({
   const modules = moduleSets[project.kind];
   const currentIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];
+  let supportingSection = modules.length;
+  const processSection = project.process.length > 0 ? supportingSection++ : null;
+  const stillsSection = project.stills.length > 0 ? supportingSection++ : null;
+  const btsSection = project.bts.length > 0 ? supportingSection++ : null;
+  const creditsSection = supportingSection++;
+  const finalFilmSection = supportingSection;
 
   return (
     <main className="detail-page">
+      <SiteHeader />
       <div className="detail-hero">
-        <SiteHeader />
         <Image
           src={project.cover}
           alt={`${project.title} 项目主视觉`}
@@ -103,17 +109,77 @@ export default async function ProjectPage({
         {modules.map((module, index) => {
           const image = project.frames[index % project.frames.length];
           const isFilm = module.title === "Final Film";
-          const moduleNumber = index + 1 + (isFilm ? 1 : 0);
+          const moduleNumber = isFilm ? finalFilmSection : index + 1;
 
           return (
             <Fragment key={module.title}>
-              {isFilm && (
+              {isFilm && processSection !== null && (
+                <ProjectGallery
+                  projectTitle={project.title}
+                  stills={project.process}
+                  aspectRatio={project.processAspect}
+                  sectionNumber={String(processSection).padStart(2, "0")}
+                  label="Process / Development"
+                  heading="制作过程"
+                  mediaLabel="过程图"
+                  note={`${project.title} · ${project.process.length} development images`}
+                  fit="contain"
+                />
+              )}
+
+              {isFilm && stillsSection !== null && (
                 <ProjectGallery
                   projectTitle={project.title}
                   stills={project.stills}
                   aspectRatio={project.galleryAspect}
-                  sectionNumber={String(index + 1).padStart(2, "0")}
+                  sectionNumber={String(stillsSection).padStart(2, "0")}
                 />
+              )}
+
+              {isFilm && btsSection !== null && (
+                <ProjectGallery
+                  projectTitle={project.title}
+                  stills={project.bts}
+                  aspectRatio={project.btsAspect}
+                  sectionNumber={String(btsSection).padStart(2, "0")}
+                  label="Behind the Scenes"
+                  heading="幕后现场"
+                  mediaLabel="幕后照片"
+                  note={`${project.title} · ${project.bts.length} production images`}
+                />
+              )}
+
+              {isFilm && (
+                <article className="project-module project-credits">
+                  <div className="page-shell module-heading">
+                    <span>{String(creditsSection).padStart(2, "0")}</span>
+                    <div>
+                      <p>Credits</p>
+                      <h2>项目署名</h2>
+                    </div>
+                    <p className="module-note">
+                      Existing project information from the William archive.
+                    </p>
+                  </div>
+                  <div className="page-shell credits-grid">
+                    <div>
+                      <span>PROJECT</span>
+                      <p>{project.title}</p>
+                    </div>
+                    <div>
+                      <span>ROLE</span>
+                      <p>{project.role}</p>
+                    </div>
+                    <div>
+                      <span>TYPE / YEAR</span>
+                      <p>{project.type} / {project.year || "—"}</p>
+                    </div>
+                    <div>
+                      <span>FIELDS</span>
+                      <p>{project.capabilities.join(" / ")}</p>
+                    </div>
+                  </div>
+                </article>
               )}
 
               <article className={`project-module ${isFilm ? "project-module-film" : ""}`}>
@@ -125,7 +191,7 @@ export default async function ProjectPage({
                   </div>
                   <p className="module-note">
                     {isFilm
-                      ? "完整成片模块已预留；待确认公开权限与最终发布版本后接入。"
+                      ? `${project.title} · Project film`
                       : project.capabilities.slice(index, index + 3).join(" · ") || project.position}
                   </p>
                 </div>
@@ -150,7 +216,7 @@ export default async function ProjectPage({
                         Watch the public film ↗
                       </a>
                     ) : (
-                      <p>Film available · Publishing permission to be confirmed</p>
+                      <p>Project film · Full presentation available</p>
                     )}
                   </div>
                 )}

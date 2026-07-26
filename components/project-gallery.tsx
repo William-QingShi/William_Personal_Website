@@ -8,6 +8,11 @@ type ProjectGalleryProps = {
   stills: string[];
   aspectRatio: string;
   sectionNumber: string;
+  label?: string;
+  heading?: string;
+  mediaLabel?: string;
+  note?: string;
+  fit?: "cover" | "contain";
 };
 
 export function ProjectGallery({
@@ -15,6 +20,11 @@ export function ProjectGallery({
   stills,
   aspectRatio,
   sectionNumber,
+  label = "Image Gallery / Stills",
+  heading = "影像静帧",
+  mediaLabel = "静帧",
+  note,
+  fit = "cover",
 }: ProjectGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
@@ -56,11 +66,11 @@ export function ProjectGallery({
       <div className="page-shell module-heading">
         <span>{sectionNumber}</span>
         <div>
-          <p>Image Gallery / Stills</p>
-          <h2>影像静帧</h2>
+          <p>{label}</p>
+          <h2>{heading}</h2>
         </div>
         <p className="module-note">
-          {projectTitle} · {stills.length} frames
+          {note ?? `${projectTitle} · ${stills.length} images`}
         </p>
       </div>
 
@@ -71,15 +81,15 @@ export function ProjectGallery({
             className="still-card"
             style={{ aspectRatio }}
             onClick={() => setActiveIndex(index)}
-            aria-label={`查看 ${projectTitle} 第 ${index + 1} 张静帧大图`}
+            aria-label={`查看 ${projectTitle} 第 ${index + 1} 张${mediaLabel}大图`}
             key={still}
           >
             <Image
               src={still}
-              alt={`${projectTitle} 静帧 ${index + 1}`}
+              alt={`${projectTitle} ${mediaLabel} ${index + 1}`}
               fill
               sizes="(max-width: 760px) 100vw, 50vw"
-              className="still-image"
+              className={`still-image ${fit === "contain" ? "still-image-contain" : ""}`}
             />
             <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
           </button>
@@ -91,7 +101,7 @@ export function ProjectGallery({
           className="stills-lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label={`${projectTitle} 静帧大图`}
+          aria-label={`${projectTitle} ${mediaLabel}大图`}
           onClick={close}
         >
           <button
@@ -112,7 +122,7 @@ export function ProjectGallery({
                 event.stopPropagation();
                 showPrevious();
               }}
-              aria-label="查看上一张静帧"
+              aria-label={`查看上一张${mediaLabel}`}
             >
               ←
             </button>
@@ -121,7 +131,7 @@ export function ProjectGallery({
           <div className="lightbox-image-wrap" onClick={(event) => event.stopPropagation()}>
             <Image
               src={stills[activeIndex]}
-              alt={`${projectTitle} 静帧 ${activeIndex + 1} 大图`}
+              alt={`${projectTitle} ${mediaLabel} ${activeIndex + 1} 大图`}
               fill
               sizes="100vw"
               className="lightbox-image"
@@ -137,7 +147,7 @@ export function ProjectGallery({
                 event.stopPropagation();
                 showNext();
               }}
-              aria-label="查看下一张静帧"
+              aria-label={`查看下一张${mediaLabel}`}
             >
               →
             </button>
