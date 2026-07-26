@@ -67,6 +67,15 @@ export function HomeHero() {
               sizes="100vw"
               className="hero-image"
             />
+            <div className="hero-projection" aria-hidden="true">
+              <Image
+                src="/images/hero/hero-william-light.jpg"
+                alt=""
+                fill
+                sizes="100vw"
+                className="hero-projection-image"
+              />
+            </div>
           </div>
         </div>
       </div>
