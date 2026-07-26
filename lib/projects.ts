@@ -5,6 +5,7 @@ import factoryRaw from "@/content/projects/04_07_三线故事_消失的老厂房
 import tidesRaw from "@/content/projects/05_22_潮汐之间.md?raw";
 import formRaw from "@/content/projects/06_20_我见之形.md?raw";
 import hbnRaw from "@/content/projects/07_31_HBN_AIGC广告宣传片.md?raw";
+import jiamuRaw from "@/content/projects/08_18_嘉姆查瓦绒.md?raw";
 
 export type ProjectKind = "ai" | "cinematography" | "documentary";
 
@@ -43,6 +44,7 @@ const sourceProjects = [
   { id: "22", raw: tidesRaw },
   { id: "20", raw: formRaw },
   { id: "31", raw: hbnRaw },
+  { id: "18", raw: jiamuRaw },
 ];
 
 function mediaSet(folder: "stills" | "bts" | "process", slug: string, count: number) {
@@ -71,6 +73,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     coverAspect: "16 / 9",
     kind: "ai",
     featured: true,
+    externalFilm: "https://weixin.qq.com/sph/AoCzEWlgFc/",
     moduleNotes: {
       Concept: "围绕院系宣传片建立概念与镜头方向，并把画面需求拆解为可执行的生成资产。",
       "AI Workflow": "William 负责图像生成、视频生成、剪辑、音效与包装，覆盖从概念到输出的完整链路。",
@@ -146,9 +149,9 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     featured: false,
     externalFilm: "https://www.bilibili.com/video/BV1bh81e5EnH",
     moduleNotes: {
-      Story: "项目以老厂房为观察对象，William 负责从前期策划到现场执行的完整制作链路。",
-      "Visual Approach": "导演与摄影由同一创作判断贯穿，以真实场景和人物信息为画面基础。",
-      Production: "制作策划、器材汇总与现场执行共同构成纪录片的生产方法。",
+      Story: "项目以老厂房为观察对象，摄影工作围绕真实空间、人物与现场气氛展开。",
+      "Visual Approach": "William 作为摄影指导，以真实场景和人物信息为画面基础。",
+      Production: "现场摄影在不打断纪录对象的前提下组织空间、人物和光线。",
       Frames: "现有画面用于呈现老厂房的空间状态与纪录片现场质感。",
     },
   },
@@ -193,6 +196,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     coverAspect: "16 / 9",
     kind: "cinematography",
     featured: false,
+    externalFilm: "https://www.xinpianchang.com/a13447095?from=webShare&channel=copyLink",
     moduleNotes: {
       "Visual Concept": "项目以实验影像语言和摄影表达为核心，William 担任摄影指导。",
       "Camera System": "摄影选择围绕视觉探索展开，器材规划作为现有制作资料的一部分保留。",
@@ -222,6 +226,30 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       Concept: "以商业视觉表达为练习方向建立个人概念，不代表 HBN 官方委托。",
       "AI Workflow": "William 负责视频生成，并通过人物、场景与角色资产组织生成过程。",
       "Asset Development": "过程资料展示人物资产、场景资产、角色资产与生成图片的开发关系。",
+    },
+  },
+  "18": {
+    id: "18",
+    slug: "jiamu-chawarong",
+    cover: "/images/projects/stills/jiamu-chawarong-01.jpg",
+    frames: [
+      "/images/projects/stills/jiamu-chawarong-01.jpg",
+      "/images/projects/stills/jiamu-chawarong-02.jpg",
+      "/images/projects/stills/jiamu-chawarong-03.jpg",
+    ],
+    stills: mediaSet("stills", "jiamu-chawarong", 9),
+    bts: [],
+    process: [],
+    galleryAspect: "16 / 9",
+    btsAspect: "3 / 2",
+    processAspect: "16 / 10",
+    coverAspect: "16 / 9",
+    kind: "documentary",
+    featured: false,
+    moduleNotes: {
+      Story: "影像在村落日常、人物劳作与自然环境之间展开，保留真实生活的时间感。",
+      "Visual Approach": "William 作为摄影师，以现场光线和克制机位建立人物与环境的观看距离。",
+      Frames: "精选静帧呈现人物、村落、山路与季节气氛之间的关系。",
     },
   },
 };

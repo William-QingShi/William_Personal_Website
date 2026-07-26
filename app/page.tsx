@@ -133,11 +133,11 @@ export default function Home() {
           <p className="contact-note">
             Selected collaborations in AI moving image, creative technology and visual storytelling.
             <br />
-            Public contact details are not listed yet. Introductions are welcome through existing connections.
+            <a href="mailto:WilliamLao1220@outlook.com">WilliamLao1220@outlook.com ↗</a>
           </p>
           <div className="footer-line">
             <span>WILLIAM © 2026</span>
-            <span>CHENGDU · CHINA</span>
+            <span>AI · FILM · VISUAL STORYTELLING</span>
           </div>
         </div>
       </section>

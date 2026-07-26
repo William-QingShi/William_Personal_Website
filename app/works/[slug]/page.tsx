@@ -2,33 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Fragment } from "react";
 import { ProjectGallery } from "@/components/project-gallery";
 import { SiteHeader } from "@/components/site-header";
-import { getProject, projects, type ProjectKind } from "@/lib/projects";
-
-const moduleSets: Record<ProjectKind, Array<{ title: string; cn: string }>> = {
-  ai: [
-    { title: "Concept", cn: "概念与镜头方向" },
-    { title: "AI Workflow", cn: "生成式影像工作流" },
-    { title: "Asset Development", cn: "人物、场景与视觉资产" },
-    { title: "Final Film", cn: "最终成片" },
-  ],
-  cinematography: [
-    { title: "Visual Concept", cn: "视觉概念" },
-    { title: "Camera System", cn: "摄影机、镜头与画幅系统" },
-    { title: "Lighting Design", cn: "灯光与现场控制" },
-    { title: "Frames", cn: "精选画面" },
-    { title: "Final Film", cn: "最终成片" },
-  ],
-  documentary: [
-    { title: "Story", cn: "人物与故事" },
-    { title: "Visual Approach", cn: "观察方式与影像策略" },
-    { title: "Production", cn: "策划与现场制作" },
-    { title: "Frames", cn: "精选画面" },
-    { title: "Final Film", cn: "最终成片" },
-  ],
-};
+import { getProject, projects } from "@/lib/projects";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -55,15 +31,14 @@ export default async function ProjectPage({
   const project = getProject(slug);
   if (!project) notFound();
 
-  const modules = moduleSets[project.kind];
   const currentIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];
-  let supportingSection = modules.length;
-  const processSection = project.process.length > 0 ? supportingSection++ : null;
-  const stillsSection = project.stills.length > 0 ? supportingSection++ : null;
-  const btsSection = project.bts.length > 0 ? supportingSection++ : null;
-  const creditsSection = supportingSection++;
-  const finalFilmSection = supportingSection;
+  const methodNotes = Object.entries(project.moduleNotes).slice(0, 3);
+  let sectionNumber = 1;
+  const stillsSection = project.stills.length > 0 ? sectionNumber++ : null;
+  const processSection = project.process.length > 0 ? sectionNumber++ : null;
+  const btsSection = project.bts.length > 0 ? sectionNumber++ : null;
+  const deliverySection = sectionNumber;
 
   return (
     <main className="detail-page">
@@ -105,133 +80,99 @@ export default async function ProjectPage({
               <p>{project.capabilities.slice(0, 6).join(" / ")}</p>
             </div>
           </div>
+          {methodNotes.length > 0 && (
+            <div className="method-grid">
+              {methodNotes.map(([label, note]) => (
+                <article key={label}>
+                  <span>{label}</span>
+                  <p>{note}</p>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
       <section className="project-modules">
-        {modules.map((module, index) => {
-          const image = project.frames[index % project.frames.length];
-          const isFilm = module.title === "Final Film";
-          const moduleNumber = isFilm ? finalFilmSection : index + 1;
+        {stillsSection !== null && (
+          <ProjectGallery
+            projectTitle={project.title}
+            stills={project.stills}
+            aspectRatio={project.galleryAspect}
+            sectionNumber={String(stillsSection).padStart(2, "0")}
+          />
+        )}
 
-          return (
-            <Fragment key={module.title}>
-              {isFilm && processSection !== null && (
-                <ProjectGallery
-                  projectTitle={project.title}
-                  stills={project.process}
-                  aspectRatio={project.processAspect}
-                  sectionNumber={String(processSection).padStart(2, "0")}
-                  label="Process / Development"
-                  heading="制作过程"
-                  mediaLabel="过程图"
-                  note={`${project.title} · ${project.process.length} development images`}
-                  fit="contain"
-                />
-              )}
+        {processSection !== null && (
+          <ProjectGallery
+            projectTitle={project.title}
+            stills={project.process}
+            aspectRatio={project.processAspect}
+            sectionNumber={String(processSection).padStart(2, "0")}
+            label="Process / Development"
+            heading="制作过程"
+            mediaLabel="过程图"
+            note={`${project.title} · ${project.process.length} development images`}
+            fit="contain"
+          />
+        )}
 
-              {isFilm && stillsSection !== null && (
-                <ProjectGallery
-                  projectTitle={project.title}
-                  stills={project.stills}
-                  aspectRatio={project.galleryAspect}
-                  sectionNumber={String(stillsSection).padStart(2, "0")}
-                />
-              )}
+        {btsSection !== null && (
+          <ProjectGallery
+            projectTitle={project.title}
+            stills={project.bts}
+            aspectRatio={project.btsAspect}
+            sectionNumber={String(btsSection).padStart(2, "0")}
+            label="Behind the Scenes"
+            heading="幕后现场"
+            mediaLabel="幕后照片"
+            note={`${project.title} · ${project.bts.length} production images`}
+          />
+        )}
 
-              {isFilm && btsSection !== null && (
-                <ProjectGallery
-                  projectTitle={project.title}
-                  stills={project.bts}
-                  aspectRatio={project.btsAspect}
-                  sectionNumber={String(btsSection).padStart(2, "0")}
-                  label="Behind the Scenes"
-                  heading="幕后现场"
-                  mediaLabel="幕后照片"
-                  note={`${project.title} · ${project.bts.length} production images`}
-                />
-              )}
-
-              {isFilm && (
-                <article className="project-module project-credits">
-                  <div className="page-shell module-heading">
-                    <span>{String(creditsSection).padStart(2, "0")}</span>
-                    <div>
-                      <p>Credits</p>
-                      <h2>项目署名</h2>
-                    </div>
-                    <p className="module-note">
-                      仅呈现现有项目资料中可以确认的职责与创作信息。
-                    </p>
-                  </div>
-                  <div className="page-shell credits-grid">
-                    <div>
-                      <span>PROJECT</span>
-                      <p>{project.title}</p>
-                    </div>
-                    <div>
-                      <span>ROLE</span>
-                      <p>{project.role}</p>
-                    </div>
-                    <div>
-                      <span>TYPE / YEAR</span>
-                      <p>{project.type} / {project.year || "—"}</p>
-                    </div>
-                    <div>
-                      <span>FIELDS</span>
-                      <p>{project.capabilities.join(" / ")}</p>
-                    </div>
-                  </div>
-                </article>
-              )}
-
-              <article className={`project-module ${isFilm ? "project-module-film" : ""}`}>
-                <div className="page-shell module-heading">
-                  <span>{String(moduleNumber).padStart(2, "0")}</span>
-                  <div>
-                    <p>{module.title}</p>
-                    <h2>{module.cn}</h2>
-                  </div>
-                  <p className="module-note">
-                    {isFilm
-                      ? project.externalFilm
-                        ? `${project.title} · Public viewing link`
-                        : `${project.title} · Public viewing link not available`
-                      : project.moduleNotes[module.title] || project.position}
-                  </p>
+        <article className="project-module project-delivery">
+          <div className="page-shell module-heading">
+            <span>{String(deliverySection).padStart(2, "0")}</span>
+            <div>
+              <p>Film / Credits</p>
+              <h2>成片与署名</h2>
+            </div>
+            <p className="module-note">公开观看渠道与已确认职责集中呈现。</p>
+          </div>
+          <div className="page-shell delivery-grid">
+            <div className="film-placeholder">
+              <span>FINAL FILM</span>
+              {project.externalFilm ? (
+                <a href={project.externalFilm} target="_blank" rel="noreferrer">
+                  Watch the public film ↗
+                </a>
+              ) : (
+                <div className="film-unavailable">
+                  <p>Public link coming later.</p>
+                  <small>公开成片链接待补充，项目影像与署名内容可先浏览。</small>
                 </div>
-
-                {!isFilm && (
-                  <div className="module-image-wrap" style={{ aspectRatio: project.coverAspect }}>
-                    <Image
-                      src={image}
-                      alt={`${project.title} — ${module.cn}`}
-                      fill
-                      sizes="100vw"
-                      className="module-image"
-                    />
-                  </div>
-                )}
-
-                {isFilm && (
-                  <div className="page-shell film-placeholder">
-                    <span>FINAL FILM</span>
-                    {project.externalFilm ? (
-                      <a href={project.externalFilm} target="_blank" rel="noreferrer">
-                        Watch the public film ↗
-                      </a>
-                    ) : (
-                      <div className="film-unavailable">
-                        <p>Public viewing link not available.</p>
-                        <small>成片已记录在项目资料中，公开观看渠道尚未确认。</small>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </article>
-            </Fragment>
-          );
-        })}
+              )}
+            </div>
+            <div className="credits-grid">
+              <div>
+                <span>PROJECT</span>
+                <p>{project.title}</p>
+              </div>
+              <div>
+                <span>ROLE</span>
+                <p>{project.role}</p>
+              </div>
+              <div>
+                <span>TYPE / YEAR</span>
+                <p>{project.type} / {project.year || "—"}</p>
+              </div>
+              <div>
+                <span>FIELDS</span>
+                <p>{project.capabilities.join(" / ")}</p>
+              </div>
+            </div>
+          </div>
+        </article>
       </section>
 
       <section className="next-project">
