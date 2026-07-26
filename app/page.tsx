@@ -74,6 +74,7 @@ export default function Home() {
               <article
                 className={`archive-folder archive-folder-${index + 1}`}
                 key={item.number}
+                tabIndex={0}
               >
                 <div className="folder-paper" aria-hidden="true">
                   <span>WILLIAM / CREATIVE ARCHIVE</span>
@@ -130,9 +131,9 @@ export default function Home() {
           <p className="contact-kicker">Have a story, a question, or a strange new idea?</p>
           <h2>LET’S MAKE<br />SOMETHING <em>HUMAN.</em></h2>
           <p className="contact-note">
-            Available for AI moving image, creative technology and visual storytelling.
+            Selected collaborations in AI moving image, creative technology and visual storytelling.
             <br />
-            联系方式将在确认公开信息后接入。
+            Public contact details are not listed yet. Introductions are welcome through existing connections.
           </p>
           <div className="footer-line">
             <span>WILLIAM © 2026</span>

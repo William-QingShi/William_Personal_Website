@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type ProjectGalleryProps = {
   projectTitle: string;
@@ -27,8 +27,13 @@ export function ProjectGallery({
   fit = "cover",
 }: ProjectGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [measuredAspects, setMeasuredAspects] = useState<Record<string, string>>({});
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
 
-  const close = useCallback(() => setActiveIndex(null), []);
+  const close = useCallback(() => {
+    setActiveIndex(null);
+    window.requestAnimationFrame(() => triggerRef.current?.focus());
+  }, []);
   const showPrevious = useCallback(() => {
     setActiveIndex((current) =>
       current === null ? null : (current - 1 + stills.length) % stills.length,
@@ -79,8 +84,11 @@ export function ProjectGallery({
           <button
             type="button"
             className="still-card"
-            style={{ aspectRatio }}
-            onClick={() => setActiveIndex(index)}
+            style={{ aspectRatio: measuredAspects[still] ?? aspectRatio }}
+            onClick={(event) => {
+              triggerRef.current = event.currentTarget;
+              setActiveIndex(index);
+            }}
             aria-label={`查看 ${projectTitle} 第 ${index + 1} 张${mediaLabel}大图`}
             key={still}
           >
@@ -90,6 +98,14 @@ export function ProjectGallery({
               fill
               sizes="(max-width: 760px) 100vw, 50vw"
               className={`still-image ${fit === "contain" ? "still-image-contain" : ""}`}
+              onLoad={(event) => {
+                const image = event.currentTarget;
+                if (!image.naturalWidth || !image.naturalHeight) return;
+                const measured = `${image.naturalWidth} / ${image.naturalHeight}`;
+                setMeasuredAspects((current) =>
+                  current[still] === measured ? current : { ...current, [still]: measured },
+                );
+              }}
             />
             <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
           </button>

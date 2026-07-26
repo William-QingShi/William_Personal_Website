@@ -32,14 +32,15 @@ export function HomeHero() {
       const heroHeight = Math.max(hero.offsetHeight, 1);
       const distance = Math.min(Math.max(window.scrollY, 0), heroHeight);
       const progress = distance / heroHeight;
-      const transitionProgress = Math.max(0, (progress - 0.48) / 0.52);
+      const transitionProgress = Math.min(1, Math.max(0, (progress - 0.62) / 0.18));
+      const isCompact = window.matchMedia("(max-width: 820px)").matches;
 
-      media.style.transform = `translate3d(0, ${distance * 0.05}px, 0) scale(1.045)`;
-      exitLayer.style.transform = `scale(${1 - progress * 0.022})`;
-      exitLayer.style.opacity = String(1 - progress * 0.38);
-      poster.style.transform = `translate3d(0, ${distance * 0.022}px, 0)`;
-      poster.style.opacity = String(1 - Math.max(0, (progress - 0.3) / 0.7));
-      transition.style.opacity = String(transitionProgress * 0.94);
+      media.style.transform = `translate3d(0, ${distance * (isCompact ? 0.018 : 0.045)}px, 0) scale(${isCompact ? 1.012 : 1.045})`;
+      exitLayer.style.transform = `scale(${1 - progress * (isCompact ? 0.008 : 0.018)})`;
+      exitLayer.style.opacity = String(1 - Math.min(1, Math.max(0, (progress - 0.42) / 0.38)));
+      poster.style.transform = `translate3d(0, ${distance * 0.018}px, 0)`;
+      poster.style.opacity = String(1 - Math.min(1, Math.max(0, (progress - 0.34) / 0.3)));
+      transition.style.opacity = String(transitionProgress);
       frame = 0;
     };
     const onScroll = () => {
@@ -83,9 +84,12 @@ export function HomeHero() {
       <div className="hero-transition" ref={transitionRef} />
 
       <div className="hero-poster page-shell" ref={posterRef}>
+        <h1 id="hero-title" className="sr-only">
+          William Lao — AI Creative Technologist
+        </h1>
         <p className="hero-role">AI CREATIVE TECHNOLOGIST</p>
         <div className="hero-poster-copy">
-          <h1 id="hero-title">William Lao</h1>
+          <p className="hero-edition">WILLIAM LAO / PORTFOLIO 2026</p>
           <p>AI × Film × Creative Production</p>
         </div>
       </div>

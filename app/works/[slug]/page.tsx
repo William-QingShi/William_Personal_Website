@@ -69,15 +69,17 @@ export default async function ProjectPage({
     <main className="detail-page">
       <SiteHeader />
       <div className="detail-hero">
-        <Image
-          src={project.cover}
-          alt={`${project.title} 项目主视觉`}
-          fill
-          priority
-          sizes="100vw"
-          className="detail-hero-image"
-        />
-        <div className="detail-hero-shade" />
+        <div className="detail-hero-media" style={{ aspectRatio: project.coverAspect }}>
+          <Image
+            src={project.cover}
+            alt={`${project.title} 项目主视觉`}
+            fill
+            priority
+            sizes="100vw"
+            className="detail-hero-image"
+          />
+          <div className="detail-hero-shade" />
+        </div>
         <div className="detail-hero-copy page-shell">
           <Link href="/works" className="back-link">← ALL WORKS</Link>
           <div>
@@ -92,6 +94,7 @@ export default async function ProjectPage({
         <p className="eyebrow">OVERVIEW</p>
         <div className="overview-main">
           <h2>{project.overview}</h2>
+          {project.disclaimer && <p className="project-disclaimer">{project.disclaimer}</p>}
           <div className="overview-facts">
             <div>
               <span>ROLE</span>
@@ -158,7 +161,7 @@ export default async function ProjectPage({
                       <h2>项目署名</h2>
                     </div>
                     <p className="module-note">
-                      Existing project information from the William archive.
+                      仅呈现现有项目资料中可以确认的职责与创作信息。
                     </p>
                   </div>
                   <div className="page-shell credits-grid">
@@ -191,13 +194,15 @@ export default async function ProjectPage({
                   </div>
                   <p className="module-note">
                     {isFilm
-                      ? `${project.title} · Project film`
-                      : project.capabilities.slice(index, index + 3).join(" · ") || project.position}
+                      ? project.externalFilm
+                        ? `${project.title} · Public viewing link`
+                        : `${project.title} · Public viewing link not available`
+                      : project.moduleNotes[module.title] || project.position}
                   </p>
                 </div>
 
                 {!isFilm && (
-                  <div className="module-image-wrap">
+                  <div className="module-image-wrap" style={{ aspectRatio: project.coverAspect }}>
                     <Image
                       src={image}
                       alt={`${project.title} — ${module.cn}`}
@@ -216,7 +221,10 @@ export default async function ProjectPage({
                         Watch the public film ↗
                       </a>
                     ) : (
-                      <p>Project film · Full presentation available</p>
+                      <div className="film-unavailable">
+                        <p>Public viewing link not available.</p>
+                        <small>成片已记录在项目资料中，公开观看渠道尚未确认。</small>
+                      </div>
                     )}
                   </div>
                 )}

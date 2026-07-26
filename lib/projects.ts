@@ -27,9 +27,12 @@ export type Project = {
   galleryAspect: string;
   btsAspect: string;
   processAspect: string;
+  coverAspect: string;
   kind: ProjectKind;
   featured: boolean;
   externalFilm?: string;
+  disclaimer?: string;
+  moduleNotes: Record<string, string>;
 };
 
 const sourceProjects = [
@@ -65,8 +68,14 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     galleryAspect: "16 / 9",
     btsAspect: "3 / 2",
     processAspect: "16 / 10",
+    coverAspect: "16 / 9",
     kind: "ai",
     featured: true,
+    moduleNotes: {
+      Concept: "围绕院系宣传片建立概念与镜头方向，并把画面需求拆解为可执行的生成资产。",
+      "AI Workflow": "William 负责图像生成、视频生成、剪辑、音效与包装，覆盖从概念到输出的完整链路。",
+      "Asset Development": "人物、场景与镜头资产在统一规划下生成和筛选，为后续视频生成保持视觉连续性。",
+    },
   },
   "26": {
     id: "26",
@@ -83,8 +92,15 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     galleryAspect: "16 / 9",
     btsAspect: "3 / 2",
     processAspect: "16 / 10",
+    coverAspect: "16 / 9",
     kind: "cinematography",
     featured: true,
+    moduleNotes: {
+      "Visual Concept": "以导演创作和视觉叙事实验为核心，William 同时承担导演与摄影指导。",
+      "Camera System": "摄影设计与器材规划服务于短片的叙事结构，并在前期剧本讨论中参与镜头判断。",
+      "Lighting Design": "现场光线与画面控制被纳入同一套视觉系统，避免技术选择脱离叙事。",
+      Frames: "精选静帧保留短片真实的画面节奏、人物关系与空间气氛。",
+    },
   },
   "15": {
     id: "15",
@@ -101,8 +117,15 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     galleryAspect: "16 / 9",
     btsAspect: "3 / 2",
     processAspect: "16 / 10",
+    coverAspect: "16 / 9",
     kind: "cinematography",
     featured: true,
+    moduleNotes: {
+      "Visual Concept": "摄影与视觉系统是本项目的核心，前期从分镜、机位与画幅关系开始组织画面。",
+      "Camera System": "器材清单、机位图和分镜共同构成现场摄影执行的依据。",
+      "Lighting Design": "灯光与摄影器材规划在拍摄前协同完成，并通过现场剧照与最终静帧验证。",
+      Frames: "静帧集中呈现摄影设计在人物、空间和光线中的最终结果。",
+    },
   },
   "07": {
     id: "07",
@@ -118,9 +141,16 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     galleryAspect: "4 / 3",
     btsAspect: "4 / 3",
     processAspect: "16 / 10",
+    coverAspect: "4 / 3",
     kind: "documentary",
     featured: false,
     externalFilm: "https://www.bilibili.com/video/BV1bh81e5EnH",
+    moduleNotes: {
+      Story: "项目以老厂房为观察对象，William 负责从前期策划到现场执行的完整制作链路。",
+      "Visual Approach": "导演与摄影由同一创作判断贯穿，以真实场景和人物信息为画面基础。",
+      Production: "制作策划、器材汇总与现场执行共同构成纪录片的生产方法。",
+      Frames: "现有画面用于呈现老厂房的空间状态与纪录片现场质感。",
+    },
   },
   "22": {
     id: "22",
@@ -136,8 +166,15 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     galleryAspect: "16 / 9",
     btsAspect: "4 / 3",
     processAspect: "16 / 10",
+    coverAspect: "16 / 9",
     kind: "documentary",
     featured: false,
+    moduleNotes: {
+      Story: "人物观察和真实现场是项目的主要内容，William 作为摄影负责人建立观看距离。",
+      "Visual Approach": "摄影以不打断现场为前提，在人物、环境和情绪之间保持克制的视觉控制。",
+      Production: "现场判断集中于人物纪录片摄影与真实环境中的画面组织。",
+      Frames: "静帧与幕后照片共同呈现最终画面和摄影现场之间的关系。",
+    },
   },
   "20": {
     id: "20",
@@ -153,8 +190,15 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     galleryAspect: "16 / 9",
     btsAspect: "16 / 9",
     processAspect: "16 / 10",
+    coverAspect: "16 / 9",
     kind: "cinematography",
     featured: false,
+    moduleNotes: {
+      "Visual Concept": "项目以实验影像语言和摄影表达为核心，William 担任摄影指导。",
+      "Camera System": "摄影选择围绕视觉探索展开，器材规划作为现有制作资料的一部分保留。",
+      "Lighting Design": "光线、画面结构与影像表达被作为同一视觉探索处理。",
+      Frames: "精选静帧呈现实验影像语言在最终画面中的具体表现。",
+    },
   },
   "31": {
     id: "31",
@@ -170,8 +214,15 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     galleryAspect: "16 / 9",
     btsAspect: "3 / 2",
     processAspect: "16 / 10",
+    coverAspect: "16 / 9",
     kind: "ai",
     featured: false,
+    disclaimer: "个人 AIGC 概念实验项目，非 HBN 官方委托。",
+    moduleNotes: {
+      Concept: "以商业视觉表达为练习方向建立个人概念，不代表 HBN 官方委托。",
+      "AI Workflow": "William 负责视频生成，并通过人物、场景与角色资产组织生成过程。",
+      "Asset Development": "过程资料展示人物资产、场景资产、角色资产与生成图片的开发关系。",
+    },
   },
 };
 

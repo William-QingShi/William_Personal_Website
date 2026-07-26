@@ -14,7 +14,7 @@ export function SiteHeader({ dark = true }: { dark?: boolean }) {
           <Link href="/#about">About</Link>
           <Link href="/#contact">Contact</Link>
         </nav>
-        <div className="availability"><span /> Available for work</div>
+        <div className="availability">Chengdu · China</div>
       </div>
     </header>
   );
