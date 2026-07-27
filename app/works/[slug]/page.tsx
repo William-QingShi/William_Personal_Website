@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FactoryProductionPlan } from "@/components/factory-production-plan";
 import { ProjectGallery } from "@/components/project-gallery";
 import { ProjectFilmAccess } from "@/components/project-film-access";
 import { SiteHeader } from "@/components/site-header";
@@ -39,6 +40,7 @@ export default async function ProjectPage({
   let sectionNumber = 1;
   const stillsSection = project.stills.length > 0 ? sectionNumber++ : null;
   const processSection = project.process.length > 0 ? sectionNumber++ : null;
+  const productionPlanSection = project.slug === "vanishing-factory" ? sectionNumber++ : null;
   const btsSection = project.bts.length > 0 ? sectionNumber++ : null;
   const deliverySection = sectionNumber;
 
@@ -60,7 +62,9 @@ export default async function ProjectPage({
         <div className="detail-hero-copy page-shell">
           <Link href="/works" className="back-link">← 返回全部作品</Link>
           <div>
-            <p className="eyebrow light">{project.type} / {project.year || "YEAR TBC"}</p>
+            <p className="eyebrow light">
+              {project.type}{project.year ? ` / ${project.year}` : ""}
+            </p>
             <h1>{project.title}</h1>
             <p>{project.position}</p>
           </div>
@@ -116,6 +120,10 @@ export default async function ProjectPage({
           />
         )}
 
+        {productionPlanSection !== null && (
+          <FactoryProductionPlan sectionNumber={String(productionPlanSection).padStart(2, "0")} />
+        )}
+
         {btsSection !== null && (
           <ProjectGallery
             projectTitle={project.title}
@@ -136,7 +144,6 @@ export default async function ProjectPage({
               <p>成片 / 署名</p>
               <h2>成片与署名</h2>
             </div>
-            <p className="module-note">公开观看渠道与已确认职责集中呈现。</p>
           </div>
           <div className="page-shell delivery-grid">
             <div className="film-placeholder">

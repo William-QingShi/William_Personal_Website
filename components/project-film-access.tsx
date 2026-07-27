@@ -36,12 +36,7 @@ export function ProjectFilmAccess({
   }, [close, open]);
 
   if (!url) {
-    return (
-      <div className="film-unavailable">
-        <p>公开成片链接待补充。</p>
-        <small>当前可先浏览项目影像、制作过程与已确认署名。</small>
-      </div>
-    );
+    return null;
   }
 
   return (

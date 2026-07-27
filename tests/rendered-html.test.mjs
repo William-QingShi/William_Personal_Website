@@ -44,6 +44,7 @@ test("server-renders the cinematic portfolio home page", async () => {
   assert.match(html, /VISUAL STORYTELLING/);
   assert.match(html, /FILM PRODUCTION/);
   assert.match(html, /首页<\/a>.*作品<\/a>.*创作能力<\/a>.*关于<\/a>.*联系<\/a>/s);
+  assert.doesNotMatch(html, /下一轮|待确认/);
 });
 
 test("project detail renders a compact gallery, process and delivery structure", async () => {
@@ -97,6 +98,9 @@ test("works and every project route render confirmed titles and media", async ()
   const factoryResponse = await render("/works/vanishing-factory");
   const factoryHtml = await factoryResponse.text();
   assert.match(factoryHtml, /摄影指导/);
+  assert.match(factoryHtml, /制作策划档案/);
+  assert.match(factoryHtml, /DIT 与素材归档/);
+  assert.match(factoryHtml, /2160P · 50FPS/);
   assert.match(factoryHtml, /幕后现场/);
   assert.doesNotMatch(factoryHtml, /影像画廊 \/ 静帧/);
 
@@ -124,5 +128,6 @@ test("capability overview and four evidence-led detail routes render", async () 
     assert.match(html, /工作方式/);
     assert.match(html, /可交付内容/);
     assert.match(html, /相关项目佐证/);
+    assert.doesNotMatch(html, /下一轮可继续补充|当前已确认/);
   }
 });

@@ -20,7 +20,7 @@ export function ProjectCard({
           src={project.cover}
           alt={`${project.title} 项目画面`}
           fill
-          sizes={featured ? "(max-width: 800px) 100vw, 88vw" : "(max-width: 800px) 100vw, 50vw"}
+          sizes={featured ? "(max-width: 900px) 100vw, 50vw" : "(max-width: 800px) 100vw, 50vw"}
           className="project-image"
         />
         <div className="project-hover">
@@ -28,14 +28,14 @@ export function ProjectCard({
           <span>↗</span>
         </div>
       </Link>
-      <div className="project-meta">
-        <div>
+      <div className={`project-meta ${featured ? "project-meta-featured" : ""}`}>
+        <div className="project-meta-primary">
           <h3><Link href={`/works/${project.slug}`}>{project.title}</Link></h3>
           <p>{project.position}</p>
         </div>
         <div className="project-meta-right">
           <span>{project.type}</span>
-          <span>{project.year || "年份待确认"}</span>
+          {project.year && <span>{project.year}</span>}
         </div>
       </div>
     </article>

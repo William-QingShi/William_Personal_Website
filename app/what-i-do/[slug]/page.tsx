@@ -64,7 +64,6 @@ export default async function CapabilityPage({ params }: { params: Promise<{ slu
       <section className="capability-evidence page-shell">
         <div className="more-heading">
           <p className="eyebrow">相关项目佐证</p>
-          <p>以下内容仅使用当前已确认并公开展示的项目；下一轮可继续补充每项能力的更多材料。</p>
         </div>
         <div className="more-grid">
           {related.map((project, projectIndex) => (

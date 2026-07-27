@@ -137,7 +137,7 @@ export function ProjectGallery({
                 onClick={() => setArchiveOpen(true)}
                 aria-label={`查看 ${projectTitle} 的全部 ${completeStills.length} 张${mediaLabel}`}
               >
-                <span>更多静帧<br />来这里看呀</span>
+                <span>更多静帧来这里看呀</span>
                 <i aria-hidden="true">↗</i>
               </button>
             )}
