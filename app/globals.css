@@ -1333,19 +1333,23 @@ html.home-motion-ready [data-home-reveal].is-visible {
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
 
+.stills-more-row {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 22px;
+}
+
 .more-stills-trigger {
-  position: absolute;
-  z-index: 3;
-  right: 12px;
-  bottom: 10px;
+  position: relative;
   width: auto;
   min-height: 0;
-  padding: 0;
+  padding: 7px 0 8px;
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 8px;
-  border: 0;
+  gap: 12px;
+  border: solid rgba(255, 255, 255, 0.5);
+  border-width: 0 0 1px;
   background: transparent;
   color: white;
   font: inherit;
@@ -1359,22 +1363,21 @@ html.home-motion-ready [data-home-reveal].is-visible {
 .more-stills-trigger:hover,
 .more-stills-trigger:focus-visible {
   color: var(--lime);
-  transform: translateX(-3px);
+  border-color: var(--lime);
+  transform: translateX(-4px);
   outline: 0;
 }
 
 .more-stills-trigger span {
-  font-size: 10px;
-  line-height: 1.2;
-  letter-spacing: 0.05em;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.95);
+  font-size: 13px;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
 }
 
 .more-stills-trigger i {
   color: var(--lime);
-  font-size: 17px;
+  font-size: 21px;
   font-style: normal;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.95);
 }
 
 .production-plan-proof {
@@ -2405,15 +2408,17 @@ html.home-motion-ready [data-home-reveal].is-visible {
   }
 
   .more-stills-trigger {
-    right: 8px;
-    bottom: 7px;
     width: auto;
     min-height: 0;
-    padding: 0;
+    padding: 6px 0 7px;
   }
 
   .more-stills-trigger span {
-    font-size: 8px;
+    font-size: 11px;
+  }
+
+  .more-stills-trigger i {
+    font-size: 18px;
   }
 
   .production-plan-sheet {

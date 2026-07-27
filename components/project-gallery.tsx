@@ -129,21 +129,24 @@ export function ProjectGallery({
               />
               <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
             </button>
-            {hasArchive && index === previewStills.length - 1 && (
-              <button
-                type="button"
-                className="more-stills-trigger"
-                ref={archiveTriggerRef}
-                onClick={() => setArchiveOpen(true)}
-                aria-label={`查看 ${projectTitle} 的全部 ${completeStills.length} 张${mediaLabel}`}
-              >
-                <span>更多静帧来这里看呀</span>
-                <i aria-hidden="true">↗</i>
-              </button>
-            )}
           </div>
         ))}
       </div>
+
+      {hasArchive && (
+        <div className="page-shell stills-more-row">
+          <button
+            type="button"
+            className="more-stills-trigger"
+            ref={archiveTriggerRef}
+            onClick={() => setArchiveOpen(true)}
+            aria-label={`查看 ${projectTitle} 的全部 ${completeStills.length} 张${mediaLabel}`}
+          >
+            <span>更多静帧来这里看呀</span>
+            <i aria-hidden="true">↗</i>
+          </button>
+        </div>
+      )}
 
       {archiveOpen && (
         <div
