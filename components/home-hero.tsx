@@ -25,8 +25,8 @@ export function HomeHero() {
       const heroHeight = Math.max(hero.offsetHeight, 1);
       const distance = Math.min(Math.max(window.scrollY, 0), heroHeight);
       const progress = distance / heroHeight;
-      exitLayer.style.transform = `scale(${1.08 - progress * 0.12})`;
-      exitLayer.style.opacity = String(1 - progress * 0.88);
+      exitLayer.style.transform = `scale(${1.065 - progress * 0.08})`;
+      exitLayer.style.opacity = String(1 - progress * 0.78);
       scrollFrame = 0;
     };
     const onScroll = () => {
@@ -38,10 +38,10 @@ export function HomeHero() {
         const rect = hero.getBoundingClientRect();
         const x = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
         const y = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
-        scene.style.setProperty("--scene-x", `${(x - 0.5) * 36}px`);
-        scene.style.setProperty("--scene-y", `${(y - 0.5) * 20}px`);
-        light.style.setProperty("--light-x", `${(x - 0.5) * 72}px`);
-        light.style.setProperty("--light-y", `${(y - 0.5) * 40}px`);
+        scene.style.setProperty("--scene-x", `${(x - 0.5) * 20}px`);
+        scene.style.setProperty("--scene-y", `${(y - 0.5) * 12}px`);
+        light.style.setProperty("--light-x", `${(x - 0.5) * 40}px`);
+        light.style.setProperty("--light-y", `${(y - 0.5) * 24}px`);
         light.classList.toggle("is-beam-active", x > 0.05 && x < 0.88 && y > 0.08 && y < 0.9);
         pointerFrame = 0;
       });

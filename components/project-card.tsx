@@ -11,8 +11,10 @@ export function ProjectCard({
   index?: number;
   featured?: boolean;
 }) {
+  const layoutIndex = featured ? index : index % 3;
+
   return (
-    <article className={`project-card project-card-${index % 3} ${featured ? "project-card-featured" : ""}`}>
+    <article className={`project-card project-card-${layoutIndex} ${featured ? "project-card-featured" : ""}`}>
       <Link href={`/works/${project.slug}`} className="project-visual">
         <Image
           src={project.cover}

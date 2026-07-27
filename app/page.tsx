@@ -5,10 +5,10 @@ import { HomeMotion } from "@/components/home-motion";
 import { ProjectCard } from "@/components/project-card";
 import { SiteHeader } from "@/components/site-header";
 import { capabilities } from "@/lib/capabilities";
-import { getFeaturedProjects } from "@/lib/projects";
+import { projects } from "@/lib/projects";
 
 export default function Home() {
-  const featured = getFeaturedProjects().slice(0, 3);
+  const featured = projects.slice(0, 6);
 
   return (
     <main className="home-page">

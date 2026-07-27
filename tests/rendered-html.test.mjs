@@ -57,6 +57,9 @@ test("project detail renders a compact gallery, process and delivery structure",
   assert.match(html, /幕后现场/);
   assert.match(html, /成片 \/ 署名/);
   assert.match(html, /成片与署名/);
+  assert.match(html, /创作方法/);
+  assert.match(html, /更多静帧/);
+  assert.match(html, /共 30 张/);
   assert.match(html, /pan\.baidu\.com\/s\/1xPi5IXDtuX-MZY5WPF7MQA\?pwd=hd6f/);
   assert.match(html, /images%2Fqr%2Fyuhua\.png/);
   assert.match(html, /yuhua-01\.jpg/);
@@ -92,7 +95,10 @@ test("works and every project route render confirmed titles and media", async ()
   }
 
   const factoryResponse = await render("/works/vanishing-factory");
-  assert.match(await factoryResponse.text(), /摄影指导/);
+  const factoryHtml = await factoryResponse.text();
+  assert.match(factoryHtml, /摄影指导/);
+  assert.match(factoryHtml, /幕后现场/);
+  assert.doesNotMatch(factoryHtml, /影像画廊 \/ 静帧/);
 
   const jiamuResponse = await render("/works/jiamu-chawarong");
   const jiamuHtml = await jiamuResponse.text();

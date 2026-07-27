@@ -23,6 +23,7 @@ export type Project = {
   cover: string;
   frames: string[];
   stills: string[];
+  allStills: string[];
   bts: string[];
   process: string[];
   galleryAspect: string;
@@ -56,6 +57,13 @@ function mediaSet(folder: "stills" | "bts" | "process", slug: string, count: num
   );
 }
 
+function archiveSet(slug: string, count: number) {
+  return Array.from(
+    { length: count },
+    (_, index) => `/images/projects/archive/${slug}/${slug}-${String(index + 1).padStart(3, "0")}.jpg`,
+  );
+}
+
 const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "overview" | "role" | "capabilities" | "position" | "displayLevel">> = {
   "30": {
     id: "30",
@@ -67,6 +75,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/cdam-ai-process-2.jpg",
     ],
     stills: mediaSet("stills", "cdam-ai-promo", 4),
+    allStills: mediaSet("stills", "cdam-ai-promo", 4),
     bts: [],
     process: mediaSet("process", "cdam-ai-promo", 5),
     galleryAspect: "16 / 9",
@@ -92,7 +101,11 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/daochunhan-frame-2.jpg",
       "/images/projects/daochunhan-frame-3.jpg",
     ],
-    stills: mediaSet("stills", "daochunhan", 8),
+    stills: [
+      ...mediaSet("stills", "daochunhan", 8),
+      "/images/projects/archive/daochunhan/daochunhan-009.jpg",
+    ],
+    allStills: archiveSet("daochunhan", 117),
     bts: [],
     process: [],
     galleryAspect: "16 / 9",
@@ -121,6 +134,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/yuhua-frame-3.jpg",
     ],
     stills: mediaSet("stills", "yuhua", 9),
+    allStills: archiveSet("yuhua", 30),
     bts: mediaSet("bts", "yuhua", 8),
     process: mediaSet("process", "yuhua", 6),
     galleryAspect: "16 / 9",
@@ -147,8 +161,9 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/factory-frame-1.jpg",
       "/images/projects/factory-frame-2.jpg",
     ],
-    stills: mediaSet("stills", "vanishing-factory", 3),
-    bts: [],
+    stills: [],
+    allStills: [],
+    bts: mediaSet("stills", "vanishing-factory", 3),
     process: [],
     galleryAspect: "4 / 3",
     btsAspect: "4 / 3",
@@ -174,6 +189,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/tides-frame-2.jpg",
     ],
     stills: mediaSet("stills", "between-tides", 10),
+    allStills: archiveSet("between-tides", 165),
     bts: mediaSet("bts", "between-tides", 7),
     process: [],
     galleryAspect: "16 / 9",
@@ -200,7 +216,11 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/form-frame-1.jpg",
       "/images/projects/form-frame-2.jpg",
     ],
-    stills: mediaSet("stills", "the-form-i-see", 8),
+    stills: [
+      ...mediaSet("stills", "the-form-i-see", 8),
+      "/images/projects/archive/the-form-i-see/the-form-i-see-009.jpg",
+    ],
+    allStills: archiveSet("the-form-i-see", 17),
     bts: mediaSet("bts", "the-form-i-see", 4),
     process: [],
     galleryAspect: "16 / 9",
@@ -227,6 +247,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/hbn-frame-2.jpg",
     ],
     stills: mediaSet("stills", "hbn-aigc-concept", 7),
+    allStills: archiveSet("hbn-aigc-concept", 7),
     bts: [],
     process: mediaSet("process", "hbn-aigc-concept", 10),
     galleryAspect: "16 / 9",
@@ -255,6 +276,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
       "/images/projects/stills/jiamu-chawarong-03.jpg",
     ],
     stills: mediaSet("stills", "jiamu-chawarong", 9),
+    allStills: archiveSet("jiamu-chawarong", 144),
     bts: [],
     process: [],
     galleryAspect: "16 / 9",

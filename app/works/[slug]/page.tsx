@@ -35,6 +35,7 @@ export default async function ProjectPage({
   const currentIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];
   const methodNotes = Object.entries(project.moduleNotes).slice(0, 3);
+  const methodSummary = methodNotes.map(([, note]) => note).join(" ");
   let sectionNumber = 1;
   const stillsSection = project.stills.length > 0 ? sectionNumber++ : null;
   const processSection = project.process.length > 0 ? sectionNumber++ : null;
@@ -81,14 +82,10 @@ export default async function ProjectPage({
               <p>{project.capabilities.slice(0, 6).join(" / ")}</p>
             </div>
           </div>
-          {methodNotes.length > 0 && (
-            <div className="method-grid">
-              {methodNotes.map(([label, note]) => (
-                <article key={label}>
-                  <span>{label}</span>
-                  <p>{note}</p>
-                </article>
-              ))}
+          {methodSummary && (
+            <div className="method-summary">
+              <span>创作方法</span>
+              <p>{methodSummary}</p>
             </div>
           )}
         </div>
@@ -99,6 +96,7 @@ export default async function ProjectPage({
           <ProjectGallery
             projectTitle={project.title}
             stills={project.stills}
+            allStills={project.allStills}
             aspectRatio={project.galleryAspect}
             sectionNumber={String(stillsSection).padStart(2, "0")}
           />
