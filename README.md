@@ -69,6 +69,27 @@ npm start
 - 发布后确认生产部署成功，并检查线上关键页面。
 - 短期发布凭证不得写入文件、Git remote 或文档。
 
+## GitHub + Cloudflare Workers
+
+GitHub 仓库必须以当前 `03_Code/code` 目录作为仓库根目录，不能把包含
+`00_Documentation`、`02_Assets` 和嵌套 `.git` 的外层资料目录直接提交。
+
+Cloudflare 应使用 **Workers Builds / Import a repository**，不要使用
+Cloudflare Pages 的 `React (Vite)` 静态站预设。
+
+推荐构建设置：
+
+```text
+Production branch: main
+Root directory: /
+Build command: npm run build
+Deploy command: npm run deploy:cloudflare
+Non-production deploy command: npm run upload:cloudflare
+```
+
+`npm run build` 会生成 `dist/server/wrangler.json` 和 `dist/client`；
+部署命令使用这份生成配置发布 Worker、静态资源和 Images 绑定。
+
 ## 不得破坏
 
 - Home / Works / Project Detail / What I Do 的现有路由与内容层级。
