@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProjectGallery } from "@/components/project-gallery";
+import { ProjectFilmAccess } from "@/components/project-film-access";
 import { SiteHeader } from "@/components/site-header";
 import { getProject, projects } from "@/lib/projects";
 
@@ -56,7 +57,7 @@ export default async function ProjectPage({
           <div className="detail-hero-shade" />
         </div>
         <div className="detail-hero-copy page-shell">
-          <Link href="/works" className="back-link">← ALL WORKS</Link>
+          <Link href="/works" className="back-link">← 返回全部作品</Link>
           <div>
             <p className="eyebrow light">{project.type} / {project.year || "YEAR TBC"}</p>
             <h1>{project.title}</h1>
@@ -66,17 +67,17 @@ export default async function ProjectPage({
       </div>
 
       <section className="project-overview page-shell">
-        <p className="eyebrow">OVERVIEW</p>
+        <p className="eyebrow">项目概览</p>
         <div className="overview-main">
           <h2>{project.overview}</h2>
           {project.disclaimer && <p className="project-disclaimer">{project.disclaimer}</p>}
           <div className="overview-facts">
             <div>
-              <span>ROLE</span>
+              <span>职责</span>
               <p>{project.role}</p>
             </div>
             <div>
-              <span>FIELDS</span>
+              <span>能力领域</span>
               <p>{project.capabilities.slice(0, 6).join(" / ")}</p>
             </div>
           </div>
@@ -109,10 +110,10 @@ export default async function ProjectPage({
             stills={project.process}
             aspectRatio={project.processAspect}
             sectionNumber={String(processSection).padStart(2, "0")}
-            label="Process / Development"
+            label="制作过程 / 视觉开发"
             heading="制作过程"
             mediaLabel="过程图"
-            note={`${project.title} · ${project.process.length} development images`}
+            note={`${project.title} · ${project.process.length} 张制作过程图`}
             fit="contain"
           />
         )}
@@ -123,10 +124,10 @@ export default async function ProjectPage({
             stills={project.bts}
             aspectRatio={project.btsAspect}
             sectionNumber={String(btsSection).padStart(2, "0")}
-            label="Behind the Scenes"
+            label="幕后现场"
             heading="幕后现场"
             mediaLabel="幕后照片"
-            note={`${project.title} · ${project.bts.length} production images`}
+            note={`${project.title} · ${project.bts.length} 张幕后照片`}
           />
         )}
 
@@ -134,40 +135,36 @@ export default async function ProjectPage({
           <div className="page-shell module-heading">
             <span>{String(deliverySection).padStart(2, "0")}</span>
             <div>
-              <p>Film / Credits</p>
+              <p>成片 / 署名</p>
               <h2>成片与署名</h2>
             </div>
             <p className="module-note">公开观看渠道与已确认职责集中呈现。</p>
           </div>
           <div className="page-shell delivery-grid">
             <div className="film-placeholder">
-              <span>FINAL FILM</span>
-              {project.externalFilm ? (
-                <a href={project.externalFilm} target="_blank" rel="noreferrer">
-                  Watch the public film ↗
-                </a>
-              ) : (
-                <div className="film-unavailable">
-                  <p>Public link coming later.</p>
-                  <small>公开成片链接待补充，项目影像与署名内容可先浏览。</small>
-                </div>
-              )}
+              <span>公开成片</span>
+              <ProjectFilmAccess
+                title={project.title}
+                url={project.externalFilm}
+                platform={project.filmPlatform}
+                qr={project.filmQr}
+              />
             </div>
             <div className="credits-grid">
               <div>
-                <span>PROJECT</span>
+                <span>项目</span>
                 <p>{project.title}</p>
               </div>
               <div>
-                <span>ROLE</span>
+                <span>职责</span>
                 <p>{project.role}</p>
               </div>
               <div>
-                <span>TYPE / YEAR</span>
+                <span>类型 / 年份</span>
                 <p>{project.type} / {project.year || "—"}</p>
               </div>
               <div>
-                <span>FIELDS</span>
+                <span>能力领域</span>
                 <p>{project.capabilities.join(" / ")}</p>
               </div>
             </div>
@@ -177,7 +174,7 @@ export default async function ProjectPage({
 
       <section className="next-project">
         <Link href={`/works/${nextProject.slug}`} className="page-shell">
-          <span className="eyebrow light">NEXT PROJECT</span>
+          <span className="eyebrow light">下一个项目</span>
           <h2>{nextProject.title}</h2>
           <span className="next-arrow">↗</span>
         </Link>

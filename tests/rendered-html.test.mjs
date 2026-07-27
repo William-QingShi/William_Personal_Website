@@ -29,19 +29,21 @@ test("server-renders the cinematic portfolio home page", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>William — AI Creative Technologist<\/title>/i);
-  assert.match(html, /hero-william-light\.jpg/);
+  assert.match(html, /hero-william-light-16x9\.png/);
   assert.doesNotMatch(html, /AI CREATIVE TECHNOLOGIST/);
   assert.doesNotMatch(html, /AI × Film × Creative Production/);
   assert.doesNotMatch(html, /WILLIAM LAO \/ PORTFOLIO 2026/);
   assert.doesNotMatch(html, /Chengdu · China/i);
   assert.match(html, /WilliamLao1220@outlook\.com/);
-  assert.match(html, /SELECTED WORKS/);
-  assert.match(html, /WHAT I DO/);
+  assert.match(html, /xhslink\.cn\/m\/1Ti6I8iHq2O/);
+  assert.match(html, /b23\.tv\/DFYACtw/);
+  assert.match(html, /精选作品/);
+  assert.match(html, /创作能力/);
   assert.match(html, /AI FILM/);
   assert.match(html, /CINEMATOGRAPHY/);
   assert.match(html, /VISUAL STORYTELLING/);
   assert.match(html, /FILM PRODUCTION/);
-  assert.match(html, /Home<\/a>.*Works<\/a>.*What I Do<\/a>.*About<\/a>.*Contact<\/a>/s);
+  assert.match(html, /首页<\/a>.*作品<\/a>.*创作能力<\/a>.*关于<\/a>.*联系<\/a>/s);
 });
 
 test("project detail renders a compact gallery, process and delivery structure", async () => {
@@ -50,11 +52,13 @@ test("project detail renders a compact gallery, process and delivery structure",
 
   const html = await response.text();
   assert.match(html, /羽化/);
-  assert.match(html, /Image Gallery \/ Stills/);
-  assert.match(html, /Process \/ Development/);
-  assert.match(html, /Behind the Scenes/);
-  assert.match(html, /Film \/ Credits/);
+  assert.match(html, /影像画廊 \/ 静帧/);
+  assert.match(html, /制作过程 \/ 视觉开发/);
+  assert.match(html, /幕后现场/);
+  assert.match(html, /成片 \/ 署名/);
   assert.match(html, /成片与署名/);
+  assert.match(html, /pan\.baidu\.com\/s\/1xPi5IXDtuX-MZY5WPF7MQA\?pwd=hd6f/);
+  assert.match(html, /images%2Fqr%2Fyuhua\.png/);
   assert.match(html, /yuhua-01\.jpg/);
   assert.match(html, /projects%2Fprocess%2Fyuhua-01\.jpg/);
   assert.match(html, /projects%2Fbts%2Fyuhua-01\.jpg/);
@@ -84,7 +88,7 @@ test("works and every project route render confirmed titles and media", async ()
     const response = await render(`/works/${slug}`);
     assert.equal(response.status, 200, `${slug} should render`);
     const html = await response.text();
-    assert.match(html, /Film \/ Credits/);
+    assert.match(html, /成片 \/ 署名/);
   }
 
   const factoryResponse = await render("/works/vanishing-factory");
@@ -95,4 +99,24 @@ test("works and every project route render confirmed titles and media", async ()
   assert.match(jiamuHtml, /嘉姆查瓦绒/);
   assert.match(jiamuHtml, /jiamu-chawarong-01\.jpg/);
   assert.match(jiamuHtml, /摄影师/);
+  assert.match(jiamuHtml, /pan\.baidu\.com\/s\/11Px4MKyR0Ltx5KxinlIERQ\?pwd=w69x/);
+});
+
+test("capability overview and four evidence-led detail routes render", async () => {
+  const overviewResponse = await render("/what-i-do");
+  assert.equal(overviewResponse.status, 200);
+  const overviewHtml = await overviewResponse.text();
+  assert.match(overviewHtml, /AI 影像与生成工作流/);
+  assert.match(overviewHtml, /视觉叙事与摄影设计/);
+  assert.match(overviewHtml, /纪录片与人物内容/);
+  assert.match(overviewHtml, /前期策划与项目执行/);
+
+  for (const slug of ["ai-moving-image", "cinematography", "documentary", "production"]) {
+    const response = await render(`/what-i-do/${slug}`);
+    assert.equal(response.status, 200, `${slug} should render`);
+    const html = await response.text();
+    assert.match(html, /工作方式/);
+    assert.match(html, /可交付内容/);
+    assert.match(html, /相关项目佐证/);
+  }
 });

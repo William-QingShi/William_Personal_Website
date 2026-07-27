@@ -4,34 +4,8 @@ import { HomeHero } from "@/components/home-hero";
 import { HomeMotion } from "@/components/home-motion";
 import { ProjectCard } from "@/components/project-card";
 import { SiteHeader } from "@/components/site-header";
+import { capabilities } from "@/lib/capabilities";
 import { getFeaturedProjects } from "@/lib/projects";
-
-const capabilities = [
-  {
-    number: "01",
-    archive: "AI FILM",
-    title: "AI 影像与生成工作流",
-    description: "从概念、Prompt 与资产规划，到图像生成、视频生成、剪辑、声音和包装。",
-  },
-  {
-    number: "02",
-    archive: "CINEMATOGRAPHY",
-    title: "视觉叙事与摄影设计",
-    description: "把叙事目标转化为镜头、画幅、摄影、灯光与现场视觉系统。",
-  },
-  {
-    number: "03",
-    archive: "VISUAL STORYTELLING",
-    title: "纪录片与人物内容",
-    description: "在真实环境中观察人物，并以克制的机位、灯光和现场判断建立影像。",
-  },
-  {
-    number: "04",
-    archive: "FILM PRODUCTION",
-    title: "前期策划与项目执行",
-    description: "将需求和脚本转化为方案、分镜、器材与拍摄计划，并连接制作和交付。",
-  },
-];
 
 export default function Home() {
   const featured = getFeaturedProjects().slice(0, 3);
@@ -42,13 +16,13 @@ export default function Home() {
       <SiteHeader />
       <HomeHero />
 
-      <section className="section page-shell home-selected" id="works" data-home-reveal>
+      <section className="section page-shell home-selected" id="works">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">SELECTED WORKS</p>
+            <p className="eyebrow">精选作品</p>
             <h2>Stories, systems<br />and moving images.</h2>
           </div>
-          <Link className="text-link" href="/works">View all works <span>↗</span></Link>
+          <Link className="text-link" href="/works">查看全部作品 <span>↗</span></Link>
         </div>
 
         <div className="featured-stack">
@@ -62,7 +36,7 @@ export default function Home() {
         <div className="page-shell">
           <div className="section-heading capability-heading">
             <div>
-              <p className="eyebrow">WHAT I DO</p>
+              <p className="eyebrow">创作能力</p>
               <h2>From an idea<br />to a finished frame.</h2>
             </div>
             <p className="section-intro">
@@ -71,31 +45,31 @@ export default function Home() {
           </div>
           <div className="capability-archive">
             {capabilities.map((item, index) => (
-              <article
+              <Link
+                href={`/what-i-do/${item.slug}`}
                 className={`archive-folder archive-folder-${index + 1}`}
                 key={item.number}
-                tabIndex={0}
               >
                 <div className="folder-paper" aria-hidden="true">
-                  <span>WILLIAM / CREATIVE ARCHIVE</span>
+                  <span>WILLIAM / 创作档案</span>
                 </div>
                 <div className="folder-tab">
                   <span>{item.number}</span>
-                  <span>FIELD</span>
+                  <span>领域</span>
                 </div>
                 <div className="folder-face">
                   <div className="folder-meta">
                     <span>{item.archive}</span>
-                    <span>ARCHIVE / {item.number}</span>
+                    <span>档案 / {item.number}</span>
                   </div>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                   <div className="folder-footer" aria-hidden="true">
-                    <span>CREATIVE PRACTICE</span>
+                    <span>查看能力详情 ↗</span>
                     <span>W/L</span>
                   </div>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
@@ -110,10 +84,10 @@ export default function Home() {
             sizes="(max-width: 800px) 100vw, 46vw"
             className="about-image"
           />
-          <span className="image-caption">ON SET / VISUAL PRODUCTION</span>
+          <span className="image-caption">拍摄现场 / 视觉制作</span>
         </div>
         <div className="about-copy">
-          <p className="eyebrow">ABOUT WILLIAM</p>
+          <p className="eyebrow">关于 WILLIAM</p>
           <p className="about-lead">
             我从真实的拍摄现场出发，也在生成式影像里寻找新的叙事方式。
           </p>
@@ -121,23 +95,51 @@ export default function Home() {
             电影摄影让我理解光、空间、人物和协作；AI 则扩展了从概念到画面的路径。
             我关心的始终不是工具本身，而是如何让技术保留人的观察、情绪与选择。
           </p>
-          <Link className="text-link" href="/works">Explore the work <span>↗</span></Link>
+          <Link className="text-link" href="/works">浏览作品 <span>↗</span></Link>
         </div>
       </section>
 
       <section className="contact" id="contact">
         <div className="page-shell contact-inner">
-          <p className="eyebrow light">CONTACT</p>
-          <p className="contact-kicker">Have a story, a question, or a strange new idea?</p>
+          <p className="eyebrow light">联系</p>
+          <p className="contact-kicker">有故事、问题，或者一个还说不清的新想法？</p>
           <h2>LET’S MAKE<br />SOMETHING <em>HUMAN.</em></h2>
           <p className="contact-note">
-            Selected collaborations in AI moving image, creative technology and visual storytelling.
-            <br />
-            <a href="mailto:WilliamLao1220@outlook.com">WilliamLao1220@outlook.com ↗</a>
+            AI 影像、创意技术、摄影与视觉叙事合作。三种联系方式并列开放，选择你最顺手的一种就好。
           </p>
+          <div className="contact-grid">
+            <a className="contact-card contact-card-email" href="mailto:WilliamLao1220@outlook.com">
+              <span>01 / 邮箱</span>
+              <strong>WilliamLao1220<br />@outlook.com</strong>
+              <small>发送邮件</small>
+              <i aria-hidden="true">↗</i>
+            </a>
+            <a
+              className="contact-card contact-card-xhs"
+              href="https://xhslink.cn/m/1Ti6I8iHq2O"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span>02 / 小红书</span>
+              <strong>William 的<br />小红书主页</strong>
+              <small>58 次赞与收藏</small>
+              <i aria-hidden="true">↗</i>
+            </a>
+            <a
+              className="contact-card contact-card-bili"
+              href="https://b23.tv/DFYACtw"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span>03 / 哔哩哔哩</span>
+              <strong>小霖智商幺玖零<br />的个人空间</strong>
+              <small>打开主页</small>
+              <i aria-hidden="true">↗</i>
+            </a>
+          </div>
           <div className="footer-line">
             <span>WILLIAM © 2026</span>
-            <span>AI · FILM · VISUAL STORYTELLING</span>
+            <span>AI · 影像 · 视觉叙事</span>
           </div>
         </div>
       </section>

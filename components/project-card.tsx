@@ -22,7 +22,7 @@ export function ProjectCard({
           className="project-image"
         />
         <div className="project-hover">
-          <span>OPEN CASE</span>
+          <span>查看项目</span>
           <span>↗</span>
         </div>
       </Link>
@@ -33,7 +33,7 @@ export function ProjectCard({
         </div>
         <div className="project-meta-right">
           <span>{project.type}</span>
-          <span>{project.year || "YEAR TBC"}</span>
+          <span>{project.year || "年份待确认"}</span>
         </div>
       </div>
     </article>

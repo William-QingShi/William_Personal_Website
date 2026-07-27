@@ -32,6 +32,8 @@ export type Project = {
   kind: ProjectKind;
   featured: boolean;
   externalFilm?: string;
+  filmPlatform?: string;
+  filmQr?: string;
   disclaimer?: string;
   moduleNotes: Record<string, string>;
 };
@@ -74,6 +76,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     kind: "ai",
     featured: true,
     externalFilm: "https://weixin.qq.com/sph/AoCzEWlgFc/",
+    filmPlatform: "微信视频号",
     moduleNotes: {
       Concept: "围绕院系宣传片建立概念与镜头方向，并把画面需求拆解为可执行的生成资产。",
       "AI Workflow": "William 负责图像生成、视频生成、剪辑、音效与包装，覆盖从概念到输出的完整链路。",
@@ -98,6 +101,9 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     coverAspect: "16 / 9",
     kind: "cinematography",
     featured: true,
+    externalFilm: "https://pan.baidu.com/s/1OtDkluPK2L3JLf6xuJWUvA?pwd=338k",
+    filmPlatform: "百度网盘",
+    filmQr: "/images/qr/daochunhan.png",
     moduleNotes: {
       "Visual Concept": "以导演创作和视觉叙事实验为核心，William 同时承担导演与摄影指导。",
       "Camera System": "摄影设计与器材规划服务于短片的叙事结构，并在前期剧本讨论中参与镜头判断。",
@@ -123,6 +129,9 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     coverAspect: "16 / 9",
     kind: "cinematography",
     featured: true,
+    externalFilm: "https://pan.baidu.com/s/1xPi5IXDtuX-MZY5WPF7MQA?pwd=hd6f",
+    filmPlatform: "百度网盘",
+    filmQr: "/images/qr/yuhua.png",
     moduleNotes: {
       "Visual Concept": "摄影与视觉系统是本项目的核心，前期从分镜、机位与画幅关系开始组织画面。",
       "Camera System": "器材清单、机位图和分镜共同构成现场摄影执行的依据。",
@@ -148,6 +157,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     kind: "documentary",
     featured: false,
     externalFilm: "https://www.bilibili.com/video/BV1bh81e5EnH",
+    filmPlatform: "哔哩哔哩",
     moduleNotes: {
       Story: "项目以老厂房为观察对象，摄影工作围绕真实空间、人物与现场气氛展开。",
       "Visual Approach": "William 作为摄影指导，以真实场景和人物信息为画面基础。",
@@ -172,6 +182,9 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     coverAspect: "16 / 9",
     kind: "documentary",
     featured: false,
+    externalFilm: "https://pan.baidu.com/s/1dJRkQUACyEYVqCK4vLeHnA?pwd=pxgu",
+    filmPlatform: "百度网盘",
+    filmQr: "/images/qr/between-tides.png",
     moduleNotes: {
       Story: "人物观察和真实现场是项目的主要内容，William 作为摄影负责人建立观看距离。",
       "Visual Approach": "摄影以不打断现场为前提，在人物、环境和情绪之间保持克制的视觉控制。",
@@ -197,6 +210,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     kind: "cinematography",
     featured: false,
     externalFilm: "https://www.xinpianchang.com/a13447095?from=webShare&channel=copyLink",
+    filmPlatform: "新片场",
     moduleNotes: {
       "Visual Concept": "项目以实验影像语言和摄影表达为核心，William 担任摄影指导。",
       "Camera System": "摄影选择围绕视觉探索展开，器材规划作为现有制作资料的一部分保留。",
@@ -221,6 +235,9 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     coverAspect: "16 / 9",
     kind: "ai",
     featured: false,
+    externalFilm: "https://pan.baidu.com/s/1X6R0gyXS5dPw26xhOf_Opw?pwd=vhue",
+    filmPlatform: "百度网盘",
+    filmQr: "/images/qr/hbn-aigc-concept.png",
     disclaimer: "个人 AIGC 概念实验项目，非 HBN 官方委托。",
     moduleNotes: {
       Concept: "以商业视觉表达为练习方向建立个人概念，不代表 HBN 官方委托。",
@@ -246,6 +263,9 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     coverAspect: "16 / 9",
     kind: "documentary",
     featured: false,
+    externalFilm: "https://pan.baidu.com/s/11Px4MKyR0Ltx5KxinlIERQ?pwd=w69x",
+    filmPlatform: "百度网盘",
+    filmQr: "/images/qr/jiamu-chawarong.png",
     moduleNotes: {
       Story: "影像在村落日常、人物劳作与自然环境之间展开，保留真实生活的时间感。",
       "Visual Approach": "William 作为摄影师，以现场光线和克制机位建立人物与环境的观看距离。",

@@ -20,7 +20,7 @@ export function ProjectGallery({
   stills,
   aspectRatio,
   sectionNumber,
-  label = "Image Gallery / Stills",
+  label = "影像画廊 / 静帧",
   heading = "影像静帧",
   mediaLabel = "静帧",
   note,
@@ -75,7 +75,7 @@ export function ProjectGallery({
           <h2>{heading}</h2>
         </div>
         <p className="module-note">
-          {note ?? `${projectTitle} · ${stills.length} images`}
+          {note ?? `${projectTitle} · ${stills.length} 张影像`}
         </p>
       </div>
 
@@ -127,7 +127,7 @@ export function ProjectGallery({
             aria-label="关闭大图"
             autoFocus
           >
-            CLOSE ×
+            关闭 ×
           </button>
 
           {stills.length > 1 && (

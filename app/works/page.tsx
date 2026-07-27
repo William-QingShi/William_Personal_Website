@@ -5,8 +5,8 @@ import { SiteHeader } from "@/components/site-header";
 import { projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Selected Works",
-  description: "Selected work across AI, film, cinematography and documentary.",
+  title: "作品",
+  description: "William 的 AI 影像、摄影与纪录片作品。",
 };
 
 export default function WorksPage() {
@@ -17,18 +17,17 @@ export default function WorksPage() {
     <main className="light-page">
       <SiteHeader dark={false} />
       <header className="works-masthead page-shell">
-        <p className="eyebrow">SELECTED WORKS / 2024—2026</p>
+        <p className="eyebrow">精选作品 / 2024—2026</p>
         <h1>WORK<br /><span>IN MOTION.</span></h1>
         <div className="works-intro">
           <p>
-            AI moving image, narrative cinematography and documentary observation —
-            built as complete visual systems.
+            AI 影像、叙事摄影与纪录片观察——每个项目都被视为一套完整的视觉系统。
           </p>
-          <Link className="text-link" href="/#what-i-do">What I do <span>↗</span></Link>
+          <Link className="text-link" href="/what-i-do">创作能力 <span>↗</span></Link>
         </div>
       </header>
 
-      <section className="editorial-grid page-shell" aria-label="Selected works">
+      <section className="editorial-grid page-shell" aria-label="精选作品">
         {selected.map((project, index) => (
           <ProjectCard key={project.slug} project={project} index={index} />
         ))}
@@ -36,8 +35,8 @@ export default function WorksPage() {
 
       <section className="more-works page-shell">
         <div className="more-heading">
-          <p className="eyebrow">MORE WORKS</p>
-          <p>Different forms. The same attention to image, story and process.</p>
+          <p className="eyebrow">更多作品</p>
+          <p>形式不同，对画面、故事与制作过程的关注始终一致。</p>
         </div>
         <div className="more-grid">
           {more.map((project, index) => (
@@ -48,8 +47,8 @@ export default function WorksPage() {
 
       <footer className="works-footer">
         <div className="page-shell">
-          <p>AI · FILM · VISUAL STORYTELLING</p>
-          <Link href="/#contact">Start a conversation ↗</Link>
+          <p>AI · 影像 · 视觉叙事</p>
+          <Link href="/#contact">开始交流 ↗</Link>
         </div>
       </footer>
     </main>
