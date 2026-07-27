@@ -1,98 +1,79 @@
-# vinext-starter
+# William Personal Website
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+William Lao 的公开个人作品网站，聚焦 AI 影像、电影制作、摄影与视觉叙事。
 
-## Prerequisites
+## 当前状态
 
-- Node.js `>=22.13.0`
+- 生产版本号：以根目录 `00_Documentation/08_Current_Status.md` 为准
+- 公开地址：<https://william-creative-portfolio.jsdntpzv6n.chatgpt.site>
+- 访问策略：`public`，访客无需登录
+- 当前分支：`main`
+- Sites 项目必须复用 `.openai/hosting.json` 中的原 `project_id`
 
-## Quick Start
+完整交接状态以根目录下列文件为准：
+
+1. `00_Documentation/08_Current_Status.md`
+2. `00_Documentation/09_Iteration_Backlog.md`
+3. `00_Documentation/10_Next_Chat_Start_Prompt.md`
+
+## 网站结构
+
+- `/`：Home，含满屏 Hero、精选作品、创作能力、关于与联系
+- `/works`：全部作品
+- `/works/[slug]`：8 个项目详情页
+- `/what-i-do`：创作能力总览
+- `/what-i-do/[slug]`：4 个创作能力详情页
+
+主要实现位置：
+
+- `app/`：路由、页面与全局样式
+- `components/`：Hero、作品卡、Gallery、成片入口等组件
+- `lib/`：项目与能力数据
+- `content/projects/`：网站使用的项目 Markdown 副本
+- `public/assets/`：网页发布素材
+- `tests/`：页面结构与公开内容测试
+
+## 内容与素材来源
+
+- 根目录 `01_Content/Projects/` 是人工维护的项目内容源。
+- `content/projects/` 是网站构建使用的同步副本。
+- 两边修改后必须保持完全一致；运行 `npm run check:content` 检查。
+- 根目录 `02_Assets/` 保存原始素材；`public/assets/` 保存网站实际发布版本。
+- Showreel 未完成前不得上线空播放器或临时占位。
+
+## 本地验证
+
+需要 Node.js `>=22.13.0`。
 
 ```bash
 npm install
-npm run dev
-npm run build
+npm run check:content
+npm run lint
+npx tsc --noEmit
+npm test
 ```
 
-This starter does not use `wrangler.jsonc`.
+`npm test` 包含生产 build。需要视觉验收时，使用：
 
-## Included Shape
-
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+npm start
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+每次开发必须同时检查桌面端和移动端，并更新 Current Status 与 Backlog。
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+## 发布规则
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+- 不重新创建 Sites 项目。
+- 不更换现有公开网址和 `public` 策略。
+- 只发布已经验证并提交的代码。
+- 发布后确认生产部署成功，并检查线上关键页面。
+- 短期发布凭证不得写入文件、Git remote 或文档。
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+## 不得破坏
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+- Home / Works / Project Detail / What I Do 的现有路由与内容层级。
+- 满屏 16:9 Hero、人物整体移动、投影呼吸和克制的交互幅度。
+- Home 六个精选项目、桌面两列、移动端单列和单行标题。
+- 纯白浅色页面与深色项目模块。
+- 精选 9 张静帧、九宫格下方全量静帧入口、Lightbox 和公开成片入口。
+- 中文优先 UI、HBN 非官方委托说明及已经确认的项目职责边界。
