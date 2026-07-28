@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
@@ -7,6 +6,7 @@ import { FactoryProductionPlan } from "@/components/factory-production-plan";
 import { ProjectGallery } from "@/components/project-gallery";
 import { ProjectFilmAccess } from "@/components/project-film-access";
 import { SiteHeader } from "@/components/site-header";
+import { StaticImage as Image } from "@/components/static-image";
 import { getProject, projects } from "@/lib/projects";
 
 export function generateStaticParams() {

@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { StaticImage as Image } from "@/components/static-image";
 import type { Project } from "@/lib/projects";
 
 export function ProjectCard({

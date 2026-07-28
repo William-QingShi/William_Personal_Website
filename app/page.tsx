@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { HomeHero } from "@/components/home-hero";
 import { HomeMotion } from "@/components/home-motion";
 import { ProjectCard } from "@/components/project-card";
 import { SiteHeader } from "@/components/site-header";
+import { StaticImage as Image } from "@/components/static-image";
 import { capabilities } from "@/lib/capabilities";
 import { projects } from "@/lib/projects";
 

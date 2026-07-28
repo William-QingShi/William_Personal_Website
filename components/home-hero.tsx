@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef } from "react";
+import { StaticImage as Image } from "@/components/static-image";
 
 export function HomeHero() {
   const heroRef = useRef<HTMLElement>(null);

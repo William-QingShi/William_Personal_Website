@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://williamlao.cn"),
   title: {
     default: "William — AI Creative Technologist",
     template: "%s — William",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
     title: "William — AI Creative Technologist",
     description: "Exploring the intersection of AI, Film and Visual Storytelling.",
     type: "website",
+    url: "https://williamlao.cn",
     images: [{ url: "/og.png", width: 1792, height: 1024, alt: "William — AI Creative Technologist" }],
   },
   twitter: {
