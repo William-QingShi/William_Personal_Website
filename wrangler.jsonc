@@ -4,6 +4,13 @@
   "main": "./worker/index.ts",
   "compatibility_date": "2026-05-15",
   "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "routes": [
+    {
+      "pattern": "williamlao.cn/*",
+      "zone_name": "williamlao.cn"
+    }
+  ],
   "observability": {
     "enabled": true
   }
