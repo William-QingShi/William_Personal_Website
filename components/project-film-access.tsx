@@ -51,7 +51,7 @@ export function ProjectFilmAccess({
         {qr && (
           <button type="button" className="film-qr-trigger" ref={triggerRef} onClick={() => setOpen(true)}>
             <span className="film-qr-image">
-              <Image src={qr} alt={`${title} 公开成片二维码`} fill sizes="160px" />
+              <Image src={qr} alt={`${title} 公开成片二维码`} fill unoptimized sizes="160px" />
             </span>
             <span>扫码观看 / 点击放大</span>
           </button>

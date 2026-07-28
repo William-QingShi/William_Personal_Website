@@ -187,6 +187,7 @@ export function ProjectGallery({
                     src={still}
                     alt={`${projectTitle} ${mediaLabel} ${index + 1}`}
                     fill
+                    unoptimized
                     sizes="(max-width: 580px) 50vw, (max-width: 1000px) 33vw, 20vw"
                     className="still-image"
                   />
@@ -235,6 +236,7 @@ export function ProjectGallery({
               src={lightboxImages[activeIndex]}
               alt={`${projectTitle} ${mediaLabel} ${activeIndex + 1} 大图`}
               fill
+              unoptimized
               sizes="100vw"
               className="lightbox-image"
               priority
