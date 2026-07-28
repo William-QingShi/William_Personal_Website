@@ -85,6 +85,7 @@ export function HomeHero() {
                 src="/images/hero/hero-william-light-16x9.png"
                 alt=""
                 fill
+                unoptimized
                 sizes="100vw"
                 className="hero-projection-image"
               />

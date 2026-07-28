@@ -54,6 +54,7 @@ export default async function ProjectPage({
             alt={`${project.title} 项目主视觉`}
             fill
             priority
+            unoptimized
             sizes="100vw"
             className="detail-hero-image"
           />

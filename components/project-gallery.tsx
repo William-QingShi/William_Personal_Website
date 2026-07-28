@@ -116,6 +116,7 @@ export function ProjectGallery({
                 src={still}
                 alt={`${projectTitle} ${mediaLabel} ${index + 1}`}
                 fill
+                unoptimized
                 sizes="(max-width: 760px) 50vw, 33vw"
                 className={`still-image ${fit === "contain" ? "still-image-contain" : ""}`}
                 onLoad={(event) => {

@@ -66,7 +66,7 @@ export function ProjectFilmAccess({
             </button>
             <p>{title}</p>
             <div className="qr-modal-image">
-              <Image src={qr} alt={`${title} 公开成片二维码大图`} fill sizes="min(78vw, 520px)" priority />
+              <Image src={qr} alt={`${title} 公开成片二维码大图`} fill unoptimized sizes="min(78vw, 520px)" priority />
             </div>
             <a href={url} target="_blank" rel="noreferrer">直接打开 {platform ?? "公开链接"} ↗</a>
           </div>

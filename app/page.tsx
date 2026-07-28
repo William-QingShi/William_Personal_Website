@@ -81,6 +81,7 @@ export default function Home() {
             src="/images/about/william-on-set.jpg"
             alt="William 在拍摄现场调整摄影机"
             fill
+            unoptimized
             sizes="(max-width: 800px) 100vw, 46vw"
             className="about-image"
           />

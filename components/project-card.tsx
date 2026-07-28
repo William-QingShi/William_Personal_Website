@@ -20,6 +20,7 @@ export function ProjectCard({
           src={project.cover}
           alt={`${project.title} 项目画面`}
           fill
+          unoptimized
           sizes={featured ? "(max-width: 900px) 100vw, 50vw" : "(max-width: 800px) 100vw, 50vw"}
           className="project-image"
         />
