@@ -62,10 +62,10 @@ test("project detail renders a compact gallery, process and delivery structure",
   assert.match(html, /更多静帧/);
   assert.match(html, /共 30 张/);
   assert.match(html, /pan\.baidu\.com\/s\/1xPi5IXDtuX-MZY5WPF7MQA\?pwd=hd6f/);
-  assert.match(html, /images%2Fqr%2Fyuhua\.png/);
+  assert.match(html, /images\/qr\/yuhua\.png/);
   assert.match(html, /yuhua-01\.jpg/);
-  assert.match(html, /projects%2Fprocess%2Fyuhua-01\.jpg/);
-  assert.match(html, /projects%2Fbts%2Fyuhua-01\.jpg/);
+  assert.match(html, /projects\/process\/yuhua-01\.jpg/);
+  assert.match(html, /projects\/bts\/yuhua-01\.jpg/);
   assert.doesNotMatch(html, /permission|权限待确认/i);
 });
 
