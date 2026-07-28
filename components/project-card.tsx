@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import type { Project } from "@/lib/projects";
 
 export function ProjectCard({
@@ -17,16 +18,20 @@ export function ProjectCard({
     <article className={`project-card project-card-${layoutIndex} ${featured ? "project-card-featured" : ""}`}>
       <Link href={`/works/${project.slug}`} className="project-visual">
         <Image
-          src={project.cover}
+          src={project.thumbnail}
           alt={`${project.title} 项目画面`}
           fill
           unoptimized
           sizes={featured ? "(max-width: 900px) 100vw, 50vw" : "(max-width: 800px) 100vw, 50vw"}
           className="project-image"
+          style={{
+            "--thumbnail-scale": project.thumbnailScale ?? 1,
+            objectPosition: project.thumbnailPosition ?? "50% 50%",
+          } as CSSProperties}
         />
         <div className="project-hover">
-          <span>查看项目</span>
-          <span>↗</span>
+          <span className="project-hover-label">查看项目</span>
+          <span aria-hidden="true">↗</span>
         </div>
       </Link>
       <div className={`project-meta ${featured ? "project-meta-featured" : ""}`}>

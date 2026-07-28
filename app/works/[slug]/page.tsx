@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { CSSProperties } from "react";
 import { FactoryProductionPlan } from "@/components/factory-production-plan";
 import { ProjectGallery } from "@/components/project-gallery";
 import { ProjectFilmAccess } from "@/components/project-film-access";
@@ -179,10 +180,25 @@ export default async function ProjectPage({
       </section>
 
       <section className="next-project">
-        <Link href={`/works/${nextProject.slug}`} className="page-shell">
-          <span className="eyebrow light">下一个项目</span>
-          <h2>{nextProject.title}</h2>
-          <span className="next-arrow">↗</span>
+        <Link href={`/works/${nextProject.slug}`} className="next-project-link">
+          <Image
+            src={nextProject.thumbnail}
+            alt=""
+            fill
+            unoptimized
+            sizes="100vw"
+            className="next-project-image"
+            style={{
+              "--thumbnail-scale": nextProject.thumbnailScale ?? 1,
+              objectPosition: nextProject.thumbnailPosition ?? "50% 50%",
+            } as CSSProperties}
+          />
+          <span className="next-project-shade" aria-hidden="true" />
+          <span className="page-shell next-project-content">
+            <span className="eyebrow light">下一个项目</span>
+            <span className="next-project-title">{nextProject.title}</span>
+            <span className="next-arrow">↗</span>
+          </span>
         </Link>
       </section>
     </main>

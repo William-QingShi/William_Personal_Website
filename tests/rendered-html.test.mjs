@@ -66,6 +66,8 @@ test("project detail renders a compact gallery, process and delivery structure",
   assert.match(html, /yuhua-01\.jpg/);
   assert.match(html, /projects\/process\/yuhua-01\.jpg/);
   assert.match(html, /projects\/bts\/yuhua-01\.jpg/);
+  assert.match(html, /next-project-image/);
+  assert.match(html, /film-primary-link/);
   assert.doesNotMatch(html, /permission|权限待确认/i);
 });
 
@@ -75,6 +77,7 @@ test("works and every project route render confirmed titles and media", async ()
   const worksHtml = await worksResponse.text();
   assert.match(worksHtml, /嘉姆查瓦绒/);
   assert.match(worksHtml, /倒春寒/);
+  assert.match(worksHtml, /stills\/hbn-aigc-concept-02\.jpg/);
   assert.doesNotMatch(worksHtml, /渡见春/);
 
   const routes = [

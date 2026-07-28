@@ -44,8 +44,9 @@ export function ProjectFilmAccess({
       <div className="film-access">
         <div>
           <small>{platform ?? "公开观看渠道"}</small>
-          <a href={url} target="_blank" rel="noreferrer">
-            点击打开成片 <span aria-hidden="true">↗</span>
+          <a className="film-primary-link" href={url} target="_blank" rel="noreferrer">
+            <span className="film-link-arrow" aria-hidden="true">↗</span>
+            <span className="film-link-text">点击打开成片</span>
           </a>
         </div>
         {qr && (

@@ -21,6 +21,9 @@ export type Project = {
   position: string;
   displayLevel: string;
   cover: string;
+  thumbnail: string;
+  thumbnailScale?: number;
+  thumbnailPosition?: string;
   frames: string[];
   stills: string[];
   allStills: string[];
@@ -69,6 +72,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     id: "30",
     slug: "cdam-ai-promo",
     cover: "/images/projects/cdam-ai-cover.jpg",
+    thumbnail: "/images/projects/cdam-ai-cover.jpg",
     frames: [
       "/images/projects/cdam-ai-frame-1.jpg",
       "/images/projects/cdam-ai-process-1.jpg",
@@ -96,6 +100,9 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     id: "26",
     slug: "daochunhan",
     cover: "/images/projects/daochunhan-cover.jpg",
+    thumbnail: "/images/projects/daochunhan-cover.jpg",
+    thumbnailScale: 1.42,
+    thumbnailPosition: "50% 51%",
     frames: [
       "/images/projects/daochunhan-frame-1.jpg",
       "/images/projects/daochunhan-frame-2.jpg",
@@ -128,6 +135,8 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     id: "15",
     slug: "yuhua",
     cover: "/images/projects/yuhua-cover.jpg",
+    thumbnail: "/images/projects/yuhua-cover.jpg",
+    thumbnailScale: 1.34,
     frames: [
       "/images/projects/yuhua-frame-1.jpg",
       "/images/projects/yuhua-frame-2.jpg",
@@ -157,6 +166,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     id: "07",
     slug: "vanishing-factory",
     cover: "/images/projects/factory-cover.jpg",
+    thumbnail: "/images/projects/factory-cover.jpg",
     frames: [
       "/images/projects/factory-frame-1.jpg",
       "/images/projects/factory-frame-2.jpg",
@@ -184,6 +194,8 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     id: "22",
     slug: "between-tides",
     cover: "/images/projects/tides-cover.jpg",
+    thumbnail: "/images/projects/tides-cover.jpg",
+    thumbnailScale: 1.12,
     frames: [
       "/images/projects/tides-frame-1.jpg",
       "/images/projects/tides-frame-2.jpg",
@@ -212,6 +224,8 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     id: "20",
     slug: "the-form-i-see",
     cover: "/images/projects/form-cover.jpg",
+    thumbnail: "/images/projects/stills/the-form-i-see-01.jpg",
+    thumbnailScale: 1.22,
     frames: [
       "/images/projects/form-frame-1.jpg",
       "/images/projects/form-frame-2.jpg",
@@ -242,6 +256,7 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     id: "31",
     slug: "hbn-aigc-concept",
     cover: "/images/projects/hbn-cover.jpg",
+    thumbnail: "/images/projects/stills/hbn-aigc-concept-02.jpg",
     frames: [
       "/images/projects/hbn-frame-1.jpg",
       "/images/projects/hbn-frame-2.jpg",
@@ -270,6 +285,8 @@ const projectConfig: Record<string, Omit<Project, "title" | "type" | "year" | "o
     id: "18",
     slug: "jiamu-chawarong",
     cover: "/images/projects/stills/jiamu-chawarong-01.jpg",
+    thumbnail: "/images/projects/stills/jiamu-chawarong-01.jpg",
+    thumbnailScale: 1.34,
     frames: [
       "/images/projects/stills/jiamu-chawarong-01.jpg",
       "/images/projects/stills/jiamu-chawarong-02.jpg",
