@@ -77,6 +77,7 @@ export function HomeHero() {
               alt="William 站在暖色投影光束中"
               fill
               priority
+              unoptimized
               sizes="100vw"
               className="hero-image"
             />
